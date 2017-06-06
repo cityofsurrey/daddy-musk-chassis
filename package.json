@@ -1,0 +1,103 @@
+{
+  "name": "daddy-musk-chassis",
+  "version": "1.0.0",
+  "description": "CoS Survey App Client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cityofsurrey/daddy-musk-chassis.git"
+  },
+  "author": "Andrew Song, Benny Wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cityofsurrey/daddy-musk-chassis/issues"
+  },
+  "homepage": "https://github.com/cityofsurrey/daddy-musk-chassis#readme",
+  "dependencies": {
+    "apollo-client": "1.2.2",
+    "babel-polyfill": "6.23.0",
+    "fastclick": "1.0.6",
+    "graphql-tag": "^2.1.0",
+    "prop-types": "15.5.10",
+    "radium": "0.18.3",
+    "react": "15.5.4",
+    "react-apollo": "1.2.0",
+    "react-dom": "15.5.4",
+    "react-helmet": "5.0.3",
+    "react-hot-loader": "3.0.0-beta.2",
+    "react-redux": "5.0.4",
+    "react-router-dom": "4.1.1",
+    "react-tap-event-plugin": "2.0.1",
+    "redux": "3.6.0",
+    "redux-logger": "3.0.1",
+    "redux-thunk": "2.2.0"
+  },
+  "devDependencies": {
+    "assets-webpack-plugin": "3.5.1",
+    "autoprefixer": "7.1.0",
+    "babel-core": "6.24.1",
+    "babel-eslint": "7.2.3",
+    "babel-loader": "7.0.0",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-env": "1.4.0",
+    "babel-preset-latest": "6.24.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "babel-register": "6.24.1",
+    "babel-runtime": "6.23.0",
+    "css-loader": "0.28.1",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "15.0.1",
+    "eslint-import-resolver-webpack": "0.8.1",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "5.0.3",
+    "eslint-plugin-react": "7.0.1",
+    "json-loader": "0.5.4",
+    "style-loader": "0.17.0",
+    "url-loader": "0.5.8",
+    "webpack": "2.5.1",
+    "webpack-dev-middleware": "1.10.2",
+    "webpack-hot-middleware": "2.18.0"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "stage-0",
+      "react"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "globals": {
+      "test": true,
+      "expect": true,
+      "jest": true
+    },
+    "rules": {
+      "semi": [
+        2,
+        "never"
+      ],
+      "react/jsx-filename-extension": "off",
+      "max-len": "off"
+    },
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": "./tools/webpack.config.js"
+        }
+      }
+    }
+  }
+}
