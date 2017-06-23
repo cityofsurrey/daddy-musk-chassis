@@ -31,11 +31,11 @@ const SurveyQuestions = ({
       <div style={styles.title}>Enter questions to start your poll</div>
       {
         Object.keys(questions).map((id, index) => (
-          <div key={questions[id].name}>
+          <div key={id}>
             <div style={styles.label}>Question {index + 1}</div>
             <TextArea
               value={questions[id].question}
-              name={questions[id].name}
+              name={id}
               placeholder="Type your question here..."
               onChange={onChange}
               rows={3}

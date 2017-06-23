@@ -38,7 +38,9 @@ class SurveyCreation extends Component {
 
   handleCreateSurvey = () => {
     const { actions: { createSurvey }, history } = this.props
-    createSurvey(this.state.questions)
+    const ids = Object.keys(this.state.questions)
+    const questions = ids.map(i => this.state.questions[i])
+    createSurvey(questions)
     history.push('/dashboard')
   }
 
@@ -47,7 +49,7 @@ class SurveyCreation extends Component {
     this.setState({
       questions: update(this.state.questions, { $merge: {
         [id]: {
-          name: id,
+          id,
           question: '',
           answers: [],
           status: false,
@@ -61,11 +63,8 @@ class SurveyCreation extends Component {
     console.log(value, name)
 
     this.setState({
-      questions: update(this.state.questions, { $merge: {
-        [name]: {
-          name,
-          question: value,
-        },
+      questions: update(this.state.questions, { [name]: {
+        $merge: { question: value },
       } }),
     })
   }

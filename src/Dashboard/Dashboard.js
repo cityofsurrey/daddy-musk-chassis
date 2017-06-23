@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Radium from 'radium'
 
@@ -35,7 +36,7 @@ class Dashboard extends Component {
         <div style={styles.questions}>
           <ReleaseAllQuestions />
           <div style={theme.lineSeparator} />
-          <Questions questions={[]} />
+          <Questions questions={this.props.questions} />
           <div style={theme.lineSeparator} />
         </div>
         <SecondaryButton style={styles.resultsBtn} label="Show Results" />
@@ -47,4 +48,8 @@ class Dashboard extends Component {
 Dashboard.propTypes = {}
 Dashboard.defaultProps = {}
 
-export default Radium(Dashboard)
+const mapStateToProps = state => ({
+  questions: state.survey.questions,
+})
+
+export default Radium(connect(mapStateToProps, {})(Dashboard))
