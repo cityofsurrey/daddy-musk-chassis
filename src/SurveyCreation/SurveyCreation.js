@@ -1,10 +1,31 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import update from 'immutability-helper'
 import generate from 'shortid'
 
-import { createSurvey } from './surveyCreation.module'
-import Questions from './SurveyQuestions'
+import PrimaryButton from 'components/Buttons/PrimaryButton'
+
+import { actions as surveyActions } from './surveyCreation.module'
+import Header from './Header'
+import Questions from './Questions'
+import Email from './Email'
+
+const styles = {
+  root: {
+    padding: '40px 15px',
+    textAlign: 'center',
+  },
+  generateBtn: {
+    margin: '30px 0 20px',
+  },
+  footerText: {
+    padding: '0 50px',
+  },
+  credits: {
+    padding: 50,
+  },
+}
 
 class SurveyCreation extends Component {
   state = {
@@ -12,20 +33,20 @@ class SurveyCreation extends Component {
   }
 
   componentWillMount() {
-    this.addQuestion()
+    this.handleAddQuestions()
   }
 
-  createSurvey = () => {
-    const { handleCreateSurvey, history } = this.props
-    handleCreateSurvey(this.state.questions)
+  handleCreateSurvey = () => {
+    const { actions: { createSurvey }, history } = this.props
+    createSurvey(this.state.questions)
     history.push('/dashboard')
   }
 
-  addQuestion = () => {
+  handleAddQuestions = () => {
     const id = generate()
     this.setState({
       questions: update(this.state.questions, { $merge: {
-        id: {
+        [id]: {
           name: id,
           question: '',
           answers: [],
@@ -51,19 +72,20 @@ class SurveyCreation extends Component {
 
   render() {
     return (
-      <div>
-        Create surveys here.
-        <Questions onChange={this.handleQuestionChange} onAdd={this.addQuestion} questions={this.state.questions} />
-        <button onClick={this.createSurvey}>Create</button>
+      <div style={styles.root}>
+        <Header />
+        <Email />
+        <Questions onChange={this.handleQuestionChange} addQuestion={this.handleAddQuestions} questions={this.state.questions} />
+        <PrimaryButton style={styles.generateBtn} label="Generate Poll" />
+        <div style={styles.footerText}>By generating your poll, you agree to the Terms of Service.</div>
+        <div style={styles.credits}>Designed and Developed by the Polltal team</div>
       </div>
     )
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  handleCreateSurvey(questions) {
-    return dispatch(createSurvey(questions))
-  },
+  actions: bindActionCreators({ ...surveyActions }, dispatch),
 })
 
 export default connect(

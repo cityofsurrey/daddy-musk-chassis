@@ -1,0 +1,63 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import Radium from 'radium'
+
+import FlatCard from 'components/FlatCard'
+import TextArea from 'components/TextArea'
+import SecondaryButton from 'components/Buttons/SecondaryButton'
+
+const styles = {
+  root: {
+    textAlign: 'center',
+  },
+  title: {
+    fontSize: 16,
+    margin: '0 0 30px',
+  },
+  label: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    margin: '10px 0 0',
+  },
+  addBtn: {
+    margin: '30px 0 0',
+  },
+}
+
+const SurveyQuestions = ({
+  questions, addQuestion, onChange,
+}) => (
+  <FlatCard>
+    <div style={styles.root}>
+      <div style={styles.title}>Enter questions to start your poll</div>
+      {
+        Object.keys(questions).map((id, index) => (
+          <div key={questions[id].name}>
+            <div style={styles.label}>Question {index + 1}</div>
+            <TextArea
+              value={questions[id].question}
+              name={questions[id].name}
+              placeholder="Type your question here..."
+              onChange={onChange}
+            />
+          </div>
+        ))
+      }
+      <SecondaryButton onClick={addQuestion} style={styles.addBtn} label="+ Add Another Question" />
+    </div>
+  </FlatCard>
+)
+
+SurveyQuestions.propTypes = {
+  questions: PropTypes.objectOf(PropTypes.object),
+  onChange: PropTypes.func,
+  addQuestion: PropTypes.func,
+}
+
+SurveyQuestions.defaultProps = {
+  questions: {},
+  onChange: () => {},
+  addQuestion: () => {},
+}
+
+export default Radium(SurveyQuestions)

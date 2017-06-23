@@ -6,7 +6,7 @@ const CREATE_SURVEY = 'CREATE_SURVEY'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const createSurvey = (questions) => ({
+export const createSurvey = questions => ({
   type: CREATE_SURVEY,
   questions,
 })
