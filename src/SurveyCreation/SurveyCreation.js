@@ -76,7 +76,7 @@ class SurveyCreation extends Component {
         <Header />
         <Email />
         <Questions onChange={this.handleQuestionChange} addQuestion={this.handleAddQuestions} questions={this.state.questions} />
-        <PrimaryButton style={styles.generateBtn} label="Generate Poll" />
+        <PrimaryButton style={styles.generateBtn} label="Generate Poll" onClick={this.handleCreateSurvey} />
         <div style={styles.footerText}>By generating your poll, you agree to the Terms of Service.</div>
         <div style={styles.credits}>Designed and Developed by the Polltal team</div>
       </div>

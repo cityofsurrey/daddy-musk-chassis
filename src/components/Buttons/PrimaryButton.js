@@ -30,7 +30,7 @@ const PrimaryButton = (props) => {
       <Link to={to}>
         <Button
           {...other}
-          customStyles={[style, styles]}
+          customStyles={[styles, style]}
           disabled={disabled}
         />
       </Link>
@@ -40,7 +40,7 @@ const PrimaryButton = (props) => {
   return (
     <Button
       {...other}
-      customStyles={[style, styles]}
+      customStyles={[styles, style]}
       disabled={disabled}
     />
   )

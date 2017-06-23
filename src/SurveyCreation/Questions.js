@@ -11,7 +11,6 @@ const styles = {
     textAlign: 'center',
   },
   title: {
-    fontSize: 16,
     margin: '0 0 30px',
   },
   label: {
@@ -39,6 +38,7 @@ const SurveyQuestions = ({
               name={questions[id].name}
               placeholder="Type your question here..."
               onChange={onChange}
+              rows={3}
             />
           </div>
         ))

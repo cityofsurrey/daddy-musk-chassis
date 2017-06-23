@@ -38,7 +38,7 @@ const theme = {
     error: '#fba2a2',
   },
   border: {
-    regular: '1px solid #d1d4db',
+    regular: '1px solid rgba(128, 139, 146, 0.25)',
     accent: '1px solid #3b2eb7',
     accentThick: '2px solid #3b2eb7',
   },
@@ -52,7 +52,7 @@ const theme = {
   lineSeparator: {
     margin: '10px 0',
     height: 1,
-    background: '#d1d4db',
+    background: 'rgba(128, 139, 146, 0.25)',
   },
   mobileShow(size, display = 'initial') {
     const media = `@media (max-width: ${size}px)`

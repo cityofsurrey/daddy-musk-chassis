@@ -33,7 +33,7 @@ const SecondaryButton = (props) => {
       <Link to={to}>
         <Button
           {...other}
-          customStyles={[style, styles]}
+          customStyles={[styles, style]}
           disabled={disabled}
         />
       </Link>
@@ -43,7 +43,7 @@ const SecondaryButton = (props) => {
   return (
     <Button
       {...other}
-      customStyles={[style, styles]}
+      customStyles={[styles, style]}
       disabled={disabled}
     />
   )
