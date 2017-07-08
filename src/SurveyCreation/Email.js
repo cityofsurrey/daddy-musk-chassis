@@ -16,20 +16,31 @@ const styles = {
   },
 }
 
-const Email = props => (
+const Email = ({
+  email,
+  onChange,
+}) => (
   <FlatCard style={styles.root}>
     <div>
       <div>Enter your email to receive your poll</div>
       <TextField
+        value={email}
         name="email"
         placeholder="emojis@polltal.com"
         inputStyle={styles.inputStyle}
+        onChange={onChange}
       />
     </div>
   </FlatCard>
 )
 
-Email.propTypes = {}
-Email.defaultProps = {}
+Email.propTypes = {
+  email: PropTypes.string,
+  onChange: PropTypes.func,
+}
+Email.defaultProps = {
+  email: '',
+  onChange: () => {},
+}
 
 export default Radium(Email)

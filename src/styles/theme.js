@@ -18,6 +18,7 @@ const theme = {
       regular: '#aaaaaa',
       medium: '#cecaca',
       dark: '#808080',
+      faded: '#808b92',
     },
     red: {
       regular: '#ff4d4d',
@@ -25,12 +26,13 @@ const theme = {
     },
     green: {
       dark: '#4f6e18',
-      primary: '#538300',
+      primary: '#77a22f',
       hover: '#485a0f',
       disable: '#9ebe73',
     },
     blue: {
       regular: '#286b8e',
+      primary: '#3b2eb7',
     },
     purple: {
       regular: '#3b2eb7',
@@ -48,9 +50,10 @@ const theme = {
   },
   shadow: {
     regular: '0 2px 10px 0 rgba(155, 155, 155, 0.5)',
+    blue: '0 3px 5px 0 rgba(60, 47, 183, 0.5)',
   },
   lineSeparator: {
-    margin: '10px 0',
+    margin: '30px 0',
     height: 1,
     background: 'rgba(128, 139, 146, 0.25)',
   },

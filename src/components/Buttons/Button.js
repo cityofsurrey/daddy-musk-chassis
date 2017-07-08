@@ -17,7 +17,7 @@ const styles = {
     touchAction: 'manipulation',
     userSelect: 'none',
     outline: 'none',
-    boxShadow: theme.shadow.regular,
+    boxShadow: theme.shadow.blue,
   },
   disabled: {
     backgroundColor: theme.color.grey.mediumLight,

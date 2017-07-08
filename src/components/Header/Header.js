@@ -9,6 +9,7 @@ const styles = {
   name: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: 'white',
   },
 }
 
