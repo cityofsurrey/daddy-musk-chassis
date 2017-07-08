@@ -18,6 +18,7 @@ const theme = {
       regular: '#aaaaaa',
       medium: '#cecaca',
       dark: '#808080',
+      faded: '#808b92',
     },
     red: {
       regular: '#ff4d4d',
@@ -25,29 +26,36 @@ const theme = {
     },
     green: {
       dark: '#4f6e18',
-      primary: '#538300',
+      primary: '#77a22f',
       hover: '#485a0f',
       disable: '#9ebe73',
     },
     blue: {
       regular: '#286b8e',
+      primary: '#3b2eb7',
+    },
+    purple: {
+      regular: '#3b2eb7',
     },
     error: '#fba2a2',
   },
   border: {
-    regular: '1px solid #d1d4db',
+    regular: '1px solid rgba(128, 139, 146, 0.25)',
+    accent: '1px solid #3b2eb7',
+    accentThick: '2px solid #3b2eb7',
   },
   borderRadius: {
-    regular: 6,
+    regular: 10,
     heavy: 15,
   },
   shadow: {
-    regular: '0 2px 4px 0 rgba(68, 68, 68, 0.35)',
+    regular: '0 2px 10px 0 rgba(155, 155, 155, 0.5)',
+    blue: '0 3px 5px 0 rgba(60, 47, 183, 0.5)',
   },
   lineSeparator: {
-    margin: '10px 0',
+    margin: '30px 0',
     height: 1,
-    background: '#d1d4db',
+    background: 'rgba(128, 139, 146, 0.25)',
   },
   mobileShow(size, display = 'initial') {
     const media = `@media (max-width: ${size}px)`
