@@ -7,7 +7,6 @@ import theme from 'theme'
 const styles = {
   root: {
     padding: '15px 20px',
-    fontSize: theme.fontSize.regular,
     fontFamily: theme.fontFamily.bold,
     textAlign: 'center',
     border: '1px solid transparent',
