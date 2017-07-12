@@ -2,11 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import FlatCard from 'components/FlatCard'
-import verySatisfied from '../../public/assets/images/verySatisfied.png'
-import satisfied from '../../public/assets/images/satisfied.png'
-import indifferent from '../../public/assets/images/indifferent.png'
-import unsatisfied from '../../public/assets/images/unsatisfied.png'
-import veryUnsatisfied from '../../public/assets/images/veryUnsatisfied.png'
+import images from 'utils/image'
 
 const styles = {
   root: {
@@ -39,14 +35,6 @@ const styles = {
   },
 }
 
-const images = [
-  verySatisfied,
-  satisfied,
-  indifferent,
-  unsatisfied,
-  veryUnsatisfied,
-]
-
 const Header = props => (
   <div style={styles.root}>
     <div style={styles.name}>Polltal</div>
@@ -54,7 +42,7 @@ const Header = props => (
     <div style={styles.desc}>Respondents will tell you how they feel on a scale of </div>
     <FlatCard style={styles.facesCard}>
       <div style={styles.faces}>
-        { images.map(i => <img key={i} src={i} alt={i} style={styles.face} />) }
+        { images.map(({ src }) => <img key={src} src={src} alt={src} style={styles.face} />) }
       </div>
     </FlatCard>
   </div>

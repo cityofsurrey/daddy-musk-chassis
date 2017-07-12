@@ -1,7 +1,8 @@
 const theme = {
   fontSize: {
-    regular: 14,
+    regular: 16,
   },
+  // TODO: Nunito font-family
   fontFamily: {
     regular: "'UniversLTStd', Helvetica, Arial, sans-serif",
     light: "'Univers LT W01 45 Light', Helvetica Neue, Helvetica, Arial, sans-serif",
@@ -19,6 +20,7 @@ const theme = {
       medium: '#cecaca',
       dark: '#808080',
       faded: '#808b92',
+      dirtySock: '#f2f2f2',
     },
     red: {
       regular: '#ff4d4d',
@@ -40,6 +42,7 @@ const theme = {
     error: '#fba2a2',
   },
   border: {
+    light: '1px solid #d1d4db',
     regular: '1px solid rgba(128, 139, 146, 0.25)',
     accent: '1px solid #3b2eb7',
     accentThick: '2px solid #3b2eb7',
