@@ -20,6 +20,7 @@ const theme = {
       medium: '#cecaca',
       dark: '#808080',
       faded: '#808b92',
+      cleanSock: '#d1d4db',
       dirtySock: '#f2f2f2',
     },
     red: {

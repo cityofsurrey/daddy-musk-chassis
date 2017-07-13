@@ -12,13 +12,33 @@ const styles = {
   card: {
     padding: '20px 20px 10px',
   },
+  backgroundCard: {
+    position: 'absolute',
+    width: '95%',
+    margin: 0,
+    top: -10,
+    left: '2.5%', // (parent Card width - this.width) / 2
+    zIndex: -5,
+  },
 }
 
-const Question = ({ question, number }) => (
-  <Card style={styles.card}>
-    <Header number={number} question={question} />
-    <Response />
-  </Card>
+const Question = ({
+  question: { id, question },
+  responses,
+  length, number,
+  onSelect,
+}) => (
+  <div>
+    <Card style={styles.card}>
+      <Card style={styles.backgroundCard} />
+      <Header length={length} number={number} question={question} />
+      <Response
+        selected={responses[id]}
+        onSelect={onSelect}
+        id={id}
+      />
+    </Card>
+  </div>
 )
 
 Question.propTypes = {}

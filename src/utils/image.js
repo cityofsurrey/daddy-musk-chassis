@@ -5,9 +5,9 @@ import unsatisfied from '../../public/assets/images/unsatisfied.png'
 import veryUnsatisfied from '../../public/assets/images/veryUnsatisfied.png'
 
 export default [
-  { src: verySatisfied, label: 'Very Satisfied' },
-  { src: satisfied, label: 'Satisfied' },
-  { src: indifferent, label: 'Indifferent' },
-  { src: unsatisfied, label: 'Unsatisfied' },
-  { src: veryUnsatisfied, label: 'Very Unsatisfied' },
+  { src: verySatisfied, label: 'Very Satisfied', value: 'verySatisfied' },
+  { src: satisfied, label: 'Satisfied', value: 'satisfied' },
+  { src: indifferent, label: 'Indifferent', value: 'indifferent' },
+  { src: unsatisfied, label: 'Unsatisfied', value: 'unsatisfied' },
+  { src: veryUnsatisfied, label: 'Very Unsatisfied', value: 'veryUnsatisfied' },
 ]

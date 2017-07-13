@@ -1,11 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Pagination from 'components/Pagination'
 import theme from 'theme'
 
 const styles = {
   root: {
     textAlign: 'left',
+  },
+  headerRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   label: {
     color: theme.color.grey.faded,
@@ -17,10 +22,11 @@ const styles = {
   },
 }
 
-const Header = ({ number, question: { id, question } }) => (
+const Header = ({ length, number, question }) => (
   <div style={styles.root}>
-    <div>
-      <div style={styles.label}>Question {number}</div>
+    <div style={styles.headerRow}>
+      <div style={styles.label}>Question {number + 1}</div>
+      <Pagination length={length} index={number} />
     </div>
     <div style={styles.question}>{question}</div>
   </div>

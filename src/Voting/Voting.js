@@ -61,14 +61,26 @@ class Voting extends Component {
     })
   }
 
+  handleSelectResponse = (id, response) => {
+    const responses = this.state.responses
+    responses[id] = response
+    this.setState({ responses })
+  }
+
   render() {
     const { releasedQuestions, questions } = this.props
-    const { number } = this.state
+    const { number, responses } = this.state
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
         <Header title="Polltal" />
-        <Question question={releasedQuestions[number]} number={number + 1} />
+        <Question
+          question={releasedQuestions[number]}
+          responses={responses}
+          number={number}
+          length={releasedQuestions.length}
+          onSelect={this.handleSelectResponse}
+        />
         <div style={styles.navBtns}>
           <SecondaryButton style={styles.navBtn} onClick={this.handlePreviousQuestion} label="Back" />
           <PrimaryButton style={styles.navBtn} onClick={this.handleNextQuestion} label="Next" />

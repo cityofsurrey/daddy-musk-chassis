@@ -26,21 +26,21 @@ const styles = {
   selected: {
     backgroundColor: theme.color.grey.dirtySock,
     border: theme.border.accentThick,
-    marginBottom: -2,
+    margin: '-2px -20px',
   },
 }
 
-const Response = ({ selected }) => (
+const Response = ({ selected, onSelect, id }) => (
   <div>
     {
-      images.map(({ src, label }, index) => (
-        <div key={src}>
-          <div style={[styles.responses, selected && styles.selected]}>
+      images.map(({ src, label, value }, index) => (
+        <div key={src} onClick={() => onSelect(id, value)} >
+          <div style={[styles.responses, (selected === value) && styles.selected]}>
             <img style={styles.image} src={src} alt={label} />
             <div>{label}</div>
           </div>
           {
-            !selected ?
+            !(selected === value) ?
               <div style={index + 1 !== images.length ? styles.separator : null} /> :
               null
           }
@@ -51,10 +51,10 @@ const Response = ({ selected }) => (
 )
 
 Response.propTypes = {
-  selected: PropTypes.bool,
+  selected: PropTypes.string,
 }
 Response.defaultProps = {
-  selected: false,
+  selected: '',
 }
 
 export default Radium(Response)
