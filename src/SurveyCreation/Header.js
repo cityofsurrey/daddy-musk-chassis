@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import FlatCard from 'components/FlatCard'
-import images from 'utils/image'
+import images from 'utils/images'
 
 const styles = {
   root: {
