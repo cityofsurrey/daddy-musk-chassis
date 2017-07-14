@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, gql } from 'react-apollo'
 
-import Voting from './Voting'
+import Result from './Result'
 
 const queryQuestions = gql`
   query($id: String!) {
@@ -24,7 +24,7 @@ const questions = [
   {
     "id": "Skdla7NSZ",
     "question": "How do you feel about the Polltal Presentation?",
-    "responses": [],
+    "responses": Array(20).fill('unsatisfied', 0, 4).fill('satisfied', 4, 10).fill('verySatisfied', 10, 20),
     "released": true
   },
   {
@@ -41,8 +41,6 @@ const questions = [
   },
 ]
 
-const releasedQuestions = questions.filter(q => q.released)
+const resultWithData = props => <Result questions={questions} {...props} />
 
-const votingWithData = props => <Voting releasedQuestions={releasedQuestions} questions={questions} {...props} />
-
-export default graphql(queryQuestions, queryConfig())(votingWithData)
+export default graphql(queryQuestions, queryConfig())(resultWithData)

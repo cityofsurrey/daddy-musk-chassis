@@ -70,7 +70,7 @@ class SurveyCreation extends Component {
         [id]: {
           id,
           question: '',
-          answers: [],
+          reponses: [],
           released: false,
         },
       } }),
