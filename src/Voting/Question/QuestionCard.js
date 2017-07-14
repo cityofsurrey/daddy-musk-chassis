@@ -6,7 +6,7 @@ import Card from 'components/FlatCard'
 import theme from 'theme'
 
 import Header from './Header'
-import Response from './Response'
+import Response from './Responses'
 
 const styles = {
   card: {

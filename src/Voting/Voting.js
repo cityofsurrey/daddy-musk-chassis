@@ -43,22 +43,17 @@ class Voting extends Component {
   }
 
   handleNextQuestion = () => {
-    const max = this.props.releasedQuestions.length - 1
-    this.setState({
-      number:
+    const { releasedQuestions } = this.props
+    const { number, responses } = this.state
+    if (responses[releasedQuestions[number].id]) {
+      const max = releasedQuestions.length - 1
+      this.setState({
+        number:
         this.state.number < max ?
         this.state.number += 1 :
         max,
-    })
-  }
-
-  handlePreviousQuestion = () => {
-    this.setState({
-      number:
-        this.state.number ?
-        this.state.number -= 1 :
-        0,
-    })
+      })
+    }
   }
 
   handleSelectResponse = (id, response) => {
@@ -82,8 +77,13 @@ class Voting extends Component {
           onSelect={this.handleSelectResponse}
         />
         <div style={styles.navBtns}>
-          <SecondaryButton style={styles.navBtn} onClick={this.handlePreviousQuestion} label="Back" />
-          <PrimaryButton style={styles.navBtn} onClick={this.handleNextQuestion} label="Next" />
+          <PrimaryButton
+            style={styles.navBtn}
+            onClick={this.handleNextQuestion}
+            label={
+              number === releasedQuestions.length - 1 ? 'Submit' : 'Next'
+            }
+          />
         </div>
       </div>
     )

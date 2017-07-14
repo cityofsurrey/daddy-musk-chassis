@@ -37,7 +37,7 @@ const questions = [
     "id": "ByW7-NNS-",
     "question": "How do you feel?",
     "responses": [],
-    "released": false
+    "released": true
   },
 ]
 
