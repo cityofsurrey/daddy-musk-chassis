@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Radium from 'radium'
+import { Link } from 'react-router-dom'
 
 import Header from 'components/Header'
-import SecondaryButton from 'components/Buttons/SecondaryButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
 import theme from 'theme'
 
@@ -81,7 +81,9 @@ class Voting extends Component {
             style={styles.navBtn}
             onClick={this.handleNextQuestion}
             label={
-              number === releasedQuestions.length - 1 ? 'Submit' : 'Next'
+              number === releasedQuestions.length - 1 ?
+                <Link to="/thanks">Submit</Link> :
+                'Next'
             }
           />
         </div>
