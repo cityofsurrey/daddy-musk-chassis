@@ -20,26 +20,7 @@ const queryConfig = props => ({
   },
 })
 
-const questions = [
-  {
-    "id": "Skdla7NSZ",
-    "question": "How do you feel about the Polltal Presentation?",
-    "responses": [],
-    "released": true
-  },
-  {
-    "id": "BynbaQVBW",
-    "question": "How do you feel about your workload?",
-    "responses": [],
-    "released": true
-  },
-  {
-    "id": "ByW7-NNS-",
-    "question": "How do you feel?",
-    "responses": [],
-    "released": true
-  },
-]
+const questions = []
 
 const releasedQuestions = questions.filter(q => q.released)
 

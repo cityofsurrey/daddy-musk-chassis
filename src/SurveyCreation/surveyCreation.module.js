@@ -51,20 +51,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  questions: [
-    {
-      id: 'SyxsVYp4Z',
-      question: 'How do you feel about the Polltal Presentation?',
-      answers: [],
-      released: false,
-    },
-    {
-      id: 'SkDi4Y6Vb',
-      question: 'How do you feel about your workload?',
-      answers: [],
-      released: false,
-    },
-  ],
+  questions: [],
 }
 
 export default function reducer(state = initialState, action) {
