@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { graphql, gql } from 'react-apollo'
 
 import Voting from './Voting'
@@ -12,18 +13,12 @@ const queryQuestions = gql`
   }
 `
 
-const queryConfig = props => ({
-  options: {
+const options = {
+  options: props => ({
     variables: {
       id: '',
     },
-  },
-})
+  }),
+}
 
-const questions = []
-
-const releasedQuestions = questions.filter(q => q.released)
-
-const votingWithData = props => <Voting releasedQuestions={releasedQuestions} questions={questions} {...props} />
-
-export default graphql(queryQuestions, queryConfig())(votingWithData)
+export default graphql(queryQuestions, options)(withRouter(Voting))
