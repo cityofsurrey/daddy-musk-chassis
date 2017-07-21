@@ -10,6 +10,7 @@ import Thanks from './Thanks'
 
 const styles = {
   position: 'relative',
+  overflowX: 'hidden',
 }
 
 export default () => (
