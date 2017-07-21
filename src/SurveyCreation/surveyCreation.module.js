@@ -7,9 +7,9 @@ const RELEASE_QUESTION = 'RELEASE_QUESTION'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const createSurvey = questions => ({
+export const createSurvey = feedback => ({
   type: CREATE_SURVEY,
-  questions,
+  feedback,
 })
 
 export const releaseQuestion = id => ({
@@ -26,20 +26,16 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 
-const handleReleaseQuestion = (state, id) => {
-  const updatedQuestions = []
-  state.forEach((q) => {
-    const newQ = q
-    if (q.id === id) newQ.released = !newQ.released
-    updatedQuestions.push(newQ)
-  })
-  return updatedQuestions
-}
+const handleReleaseQuestion = (state, id) => state.map((q) => {
+  const newQ = q
+  if (q.questionId === id) newQ.status = !newQ.status
+  return newQ
+})
 
 const ACTION_HANDLERS = {
-  [CREATE_SURVEY]: (state, { questions }) => ({
+  [CREATE_SURVEY]: (state, { feedback }) => ({
     ...state,
-    questions,
+    ...feedback,
   }),
   [RELEASE_QUESTION]: (state, { id }) => ({
     ...state,

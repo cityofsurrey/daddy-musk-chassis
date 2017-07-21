@@ -14,7 +14,7 @@ import './app.css'
 const createClient = () => (
   new ApolloClient({
     networkInterface: createNetworkInterface({
-      uri: 'ADD_CONNECTION_HERE',
+      uri: 'http://localhost:8080/graphql',
     }),
   })
 )

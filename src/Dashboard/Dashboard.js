@@ -11,7 +11,7 @@ import theme from 'theme'
 import PollLink from './PollLink'
 import ReleaseAllQuestions from './ReleaseAllQuestions'
 import Questions from './Questions'
-import { actions } from '../SurveyCreation/surveyCreation.module'
+import { actions as surveyActions } from '../SurveyCreation/surveyCreation.module'
 
 const styles = {
   root: {
@@ -43,17 +43,18 @@ class Dashboard extends Component {
   state = {}
   // TODO: separate container/presentational
   render() {
+    const { actions, questions, votingId } = this.props
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
         <Header title="Polltal" />
-        <PollLink />
+        <PollLink id={votingId} />
         <div style={styles.questions}>
           <ReleaseAllQuestions />
           <div style={theme.lineSeparator} />
           <Questions
-            onRelease={this.props.actions.releaseQuestion}
-            questions={this.props.questions}
+            onRelease={actions.releaseQuestion}
+            questions={questions}
           />
           <div style={theme.lineSeparator} />
         </div>
@@ -72,12 +73,13 @@ Dashboard.defaultProps = {
   actions: {},
 }
 
-const mapStateToProps = state => ({
-  questions: state.survey.questions,
+const mapStateToProps = ({ survey }) => ({
+  ...survey,
+  questions: survey.questions,
 })
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...actions }, dispatch),
+  actions: bindActionCreators({ ...surveyActions }, dispatch),
 })
 
 export default Radium(connect(mapStateToProps, mapDispatchToProps)(Dashboard))

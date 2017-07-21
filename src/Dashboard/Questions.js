@@ -37,13 +37,13 @@ const styles = {
 const Questions = ({ questions, onRelease }) => (
   <div>
     {
-      questions.map(({ id, question, released }, index) => (
-        <div style={styles.root} key={id}>
+      questions.map(({ questionId, question, status }, index) => (
+        <div style={styles.root} key={questionId}>
           <div style={styles.label}>
             <span style={styles.questionLabel}>Question {index + 1}</span>
-            <InternalLink onClick={() => onRelease(id)}>
+            <InternalLink onClick={() => onRelease(questionId)}>
               {
-                released ?
+                status ?
                   <i style={styles.releasedIcon} className="fa fa-check" aria-hidden="true" /> :
                   'Released'
               }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { gql, withApollo } from 'react-apollo'
 import { bindActionCreators } from 'redux'
 import update from 'immutability-helper'
 import generate from 'shortid'
@@ -50,7 +51,7 @@ class SurveyCreation extends Component {
     this.handleAddQuestions()
   }
 
-  handleCreateSurvey = () => {
+  handleCreateSurvey = async () => {
     const { actions: { createSurvey }, history } = this.props
     const ids = Object.keys(this.state.questions)
     const filterEmpty = ids.filter((i) => {
@@ -58,8 +59,72 @@ class SurveyCreation extends Component {
       return true
     })
     const questions = filterEmpty.map(i => this.state.questions[i])
-    createSurvey(questions)
-    history.push('/dashboard')
+    const questionsInput = questions.map(question => (
+      {
+        question: question.question,
+        options: [{
+          optionId: 'verySatisfied',
+          label: 'Very Satisfied',
+          votes: 0,
+        }, {
+          optionId: 'satisfied',
+          label: 'Satisfied',
+          votes: 0,
+        }, {
+          optionId: 'indifferent',
+          label: 'Indifferent',
+          votes: 0,
+        }, {
+          optionId: 'unsatisfied',
+          label: 'Unsatisfied',
+          votes: 0,
+        }, {
+          optionId: 'veryUnsatisfied',
+          label: 'Very Unsatisfied',
+          votes: 0,
+        }],
+        status: question.released,
+      }))
+    try {
+      const mutation = {
+        mutation: gql`
+          mutation createFeedback($createInput: FeedbackInput!) {
+            createFeedback(input: $createInput) {
+                feedback {
+                feedbackId
+                dashboardId
+                votingId
+                resultId
+                questions {
+                  question
+                  options {
+                    optionId
+                    label
+                    votes
+                  }
+                  status
+                  questionId
+                }
+              }
+              error
+            }
+          }
+        `,
+        variables: {
+          createInput: {
+            email: this.state.email,
+            questions: questionsInput,
+          },
+        },
+      }
+
+      const { data: { error, createFeedback: { feedback } } } = await this.props.client.mutate(mutation)
+      console.log(feedback)
+      createSurvey(feedback)
+      history.push('/dashboard')
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   handleAddQuestions = () => {
@@ -118,4 +183,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   () => ({}),
   mapDispatchToProps,
-)(SurveyCreation)
+)(withApollo(SurveyCreation))
