@@ -52,7 +52,7 @@ class SurveyCreation extends Component {
   }
 
   handleCreateSurvey = async () => {
-    const { actions: { createSurvey }, history } = this.props
+    const { history } = this.props
     const ids = Object.keys(this.state.questions)
     const filterEmpty = ids.filter((i) => {
       if (this.state.questions[i].question === '') return false
@@ -118,10 +118,8 @@ class SurveyCreation extends Component {
         },
       }
 
-      const { data: { error, createFeedback: { feedback } } } = await this.props.client.mutate(mutation)
-      console.log(feedback)
-      createSurvey(feedback)
-      history.push('/dashboard')
+      const { data: { error, createFeedback: { feedback: { dashboardId } } } } = await this.props.client.mutate(mutation)
+      history.push(`/dashboard/${dashboardId}`)
     } catch (err) {
       console.log(err)
     }

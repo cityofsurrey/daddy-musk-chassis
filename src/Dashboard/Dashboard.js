@@ -43,6 +43,15 @@ const styles = {
 class Dashboard extends Component {
   state = {}
 
+  componentWillReceiveProps = (nextProps) => {
+    if (!nextProps.data.loading) {
+      const { actions: { createSurvey } } = this.props
+      const feedback = nextProps.data.feedback ? nextProps.data.feedback.feedback : null
+
+      createSurvey(feedback)
+    }
+  }
+
   handleReleaseAllQuestions = async () => this.props.questions.forEach(x => (this.handleReleaseQuestion(x.questionId)))
 
   handleReleaseQuestion = async (questionId, status = true) => {

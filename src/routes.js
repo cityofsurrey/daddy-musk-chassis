@@ -18,7 +18,7 @@ export default () => (
     <Router>
       <div style={styles}>
         <Route exact path="/" component={SurveyCreation} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard/:pollId" component={Dashboard} />
         <Route path="/voting/:pollId" component={Voting} />
         <Route path="/result/:pollId" component={Result} />
         <Route path="/thanks" component={Thanks} />
