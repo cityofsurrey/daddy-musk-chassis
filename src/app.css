@@ -24,3 +24,10 @@ body {
   color: #333;
   line-height: 1.4;
 }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
