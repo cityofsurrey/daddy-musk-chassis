@@ -57,7 +57,7 @@ class Voting extends Component {
 
   handleUpdateVote = (questionId, optionId) => {
     try {
-      this.props.mutate({
+      this.props.submit({
         questionId,
         optionId,
       })

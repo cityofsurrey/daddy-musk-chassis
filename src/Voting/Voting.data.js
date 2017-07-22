@@ -60,16 +60,21 @@ const mutation = gql`
     }
   `
 const mutateOptions = {
-  options: ({ questionId, optionId }) => ({
-    variables: {
-      questionId,
-      optionId,
-    },
+  props: ({ mutate }) => ({
+    submit: ({ questionId, optionId }) => mutate({
+      variables: {
+        voteInput: {
+          questionId,
+          optionId,
+        },
+      },
+    }),
   }),
 }
 
-const VotingWithQuery = graphql(queryQuestions, queryConfig)(withRouter(Voting))
 const withMutate = graphql(mutation, mutateOptions)
+
+const VotingWithQuery = graphql(queryQuestions, queryConfig)(withRouter(Voting))
 const VotingWithMutation = withMutate(VotingWithQuery)
 
 export default VotingWithMutation
