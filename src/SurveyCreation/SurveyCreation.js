@@ -52,14 +52,15 @@ class SurveyCreation extends Component {
   }
 
   handleCreateSurvey = async () => {
-    const { history } = this.props
-    const ids = Object.keys(this.state.questions)
+    const { questions } = this.state
+    if (!questions.length) return
+    const ids = Object.keys(questions)
     const filterEmpty = ids.filter((i) => {
-      if (this.state.questions[i].question === '') return false
+      if (questions[i].question === '') return false
       return true
     })
-    const questions = filterEmpty.map(i => this.state.questions[i])
-    const questionsInput = questions.map(question => (
+    const filteredQuestions = filterEmpty.map(i => questions[i])
+    const questionsInput = filteredQuestions.map(question => (
       {
         question: question.question,
         options: [{
@@ -119,7 +120,7 @@ class SurveyCreation extends Component {
       }
 
       const { data: { error, createFeedback: { feedback: { dashboardId } } } } = await this.props.client.mutate(mutation)
-      history.push(`/dashboard/${dashboardId}`)
+      this.props.history.push(`/dashboard/${dashboardId}`)
     } catch (err) {
       console.log(err)
     }
