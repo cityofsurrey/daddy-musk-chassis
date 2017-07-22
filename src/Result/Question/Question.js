@@ -22,6 +22,7 @@ class Question extends Component {
       unsatisfied: 0,
       veryUnsatisfied: 0,
     },
+    voteCount: 0,
   }
 
   componentWillMount = () => {
@@ -32,10 +33,12 @@ class Question extends Component {
       unsatisfied: 0,
       veryUnsatisfied: 0,
     }
-    this.props.question.responses.forEach((response) => {
-      allResponses[response] += 1
+    let count = 0
+    this.props.question.options.forEach((response) => {
+      allResponses[response.optionId] = response.votes
+      count += response.votes
     })
-    this.setState({ responseValues: allResponses })
+    this.setState({ responseValues: allResponses, voteCount: count })
   }
 
   render() {
@@ -45,9 +48,10 @@ class Question extends Component {
         <Header
           number={number}
           question={question}
+          voteCount={this.state.voteCount}
         />
         <Responses
-          length={question.responses.length}
+          length={this.state.voteCount}
           responseValues={this.state.responseValues}
         />
       </div>
