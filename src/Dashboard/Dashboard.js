@@ -88,7 +88,7 @@ class Dashboard extends Component {
   }
   // TODO: separate container/presentational
   render() {
-    const { actions, questions, votingId } = this.props
+    const { actions, questions, votingId, resultId, history } = this.props
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
@@ -103,7 +103,7 @@ class Dashboard extends Component {
           />
           <div style={theme.lineSeparator} />
         </div>
-        <SecondaryButton style={styles.resultsBtn} label="Show Results" />
+        <SecondaryButton onClick={() => history.push(`/result/${resultId}`)} style={styles.resultsBtn} label="Show Results" />
       </div>
     )
   }
