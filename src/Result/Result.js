@@ -37,7 +37,9 @@ class Result extends Component {
         <Header title="Polltal" />
         {
           questions.map((question, index) => (
-            <Question key={question.questionId} question={question} number={index} />
+            question.status
+              ? <Question key={question.questionId} question={question} number={index} />
+              : null
           ))
         }
       </div>

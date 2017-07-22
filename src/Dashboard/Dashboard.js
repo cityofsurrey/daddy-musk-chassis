@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import Radium from 'radium'
+import { gql, withApollo } from 'react-apollo'
 
 import SecondaryButton from 'components/Buttons/SecondaryButton'
 import Header from 'components/Header'
@@ -41,6 +42,50 @@ const styles = {
 
 class Dashboard extends Component {
   state = {}
+
+  handleReleaseAllQuestions = async () => this.props.questions.forEach(x => (this.handleReleaseQuestion(x.questionId)))
+
+  handleReleaseQuestion = async (questionId, status = true) => {
+    const { actions: { releaseQuestion } } = this.props
+    try {
+      const mutation = {
+        mutation: gql`
+          mutation updateStatus($updateInput: UpdateStatusInput!) {
+            updateStatus(input: $updateInput) {
+              feedback {
+                feedbackId
+                dashboardId
+                votingId
+                resultId
+                questions {
+                  question
+                  options {
+                    optionId
+                    votes
+                    label
+                  }
+                  status
+                  questionId
+                }
+              }
+              error
+            }
+          }
+        `,
+        variables: {
+          updateInput: {
+            questionId,
+            status,
+          },
+        },
+      }
+
+      await this.props.client.mutate(mutation)
+      releaseQuestion(questionId)
+    } catch (err) {
+      console.log(err)
+    }
+  }
   // TODO: separate container/presentational
   render() {
     const { actions, questions, votingId } = this.props
@@ -50,10 +95,10 @@ class Dashboard extends Component {
         <Header title="Polltal" />
         <PollLink id={votingId} />
         <div style={styles.questions}>
-          <ReleaseAllQuestions />
+          <ReleaseAllQuestions onReleaseAll={this.handleReleaseAllQuestions} />
           <div style={theme.lineSeparator} />
           <Questions
-            onRelease={actions.releaseQuestion}
+            onRelease={this.handleReleaseQuestion}
             questions={questions}
           />
           <div style={theme.lineSeparator} />
@@ -67,10 +112,12 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object),
   actions: PropTypes.objectOf(PropTypes.func),
+  votingId: PropTypes.string,
 }
 Dashboard.defaultProps = {
   questions: [],
   actions: {},
+  votingId: '',
 }
 
 const mapStateToProps = ({ survey }) => ({
@@ -82,4 +129,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ ...surveyActions }, dispatch),
 })
 
-export default Radium(connect(mapStateToProps, mapDispatchToProps)(Dashboard))
+export default Radium(connect(mapStateToProps, mapDispatchToProps)(withApollo(Dashboard)))

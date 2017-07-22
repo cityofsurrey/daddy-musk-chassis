@@ -41,11 +41,11 @@ const Questions = ({ questions, onRelease }) => (
         <div style={styles.root} key={questionId}>
           <div style={styles.label}>
             <span style={styles.questionLabel}>Question {index + 1}</span>
-            <InternalLink onClick={() => onRelease(questionId)}>
+            <InternalLink onClick={() => onRelease(questionId, !status)}>
               {
                 status ?
                   <i style={styles.releasedIcon} className="fa fa-check" aria-hidden="true" /> :
-                  'Released'
+                  'Release'
               }
             </InternalLink>
           </div>
