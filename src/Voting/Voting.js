@@ -39,14 +39,26 @@ const styles = {
 class Voting extends Component {
   state = {
     number: 0,
+    feedback: {
+      questions: [],
+    },
     responses: {},
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.data.loading) {
+      this.setState({ feedback: {
+        questions: [],
+      } })
+    } else {
+      this.setState({ feedback: nextProps.data.feedback.feedback })
+    }
+  }
+
   handleNextQuestion = () => {
-    const { releasedQuestions } = this.props
-    const { number, responses } = this.state
-    if (responses[releasedQuestions[number].id]) {
-      const max = releasedQuestions.length - 1
+    const { number, responses, feedback: { questions } } = this.state
+    if (responses[questions[number].id]) {
+      const max = questions.length - 1
       this.setState({
         number:
         this.state.number < max ?
@@ -63,17 +75,16 @@ class Voting extends Component {
   }
 
   render() {
-    const { releasedQuestions, questions } = this.props
-    const { number, responses } = this.state
+    const { feedback, number, responses } = this.state
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
         <Header title="Polltal" />
         <Question
-          question={releasedQuestions[number]}
-          responses={responses}
+          question={feedback.questions[number]}
+          responses={feedback.questions[number].options}
           number={number}
-          length={releasedQuestions.length}
+          length={feedback.questions.length}
           onSelect={this.handleSelectResponse}
         />
         <div style={styles.navBtns}>
@@ -81,7 +92,7 @@ class Voting extends Component {
             style={styles.navBtn}
             onClick={this.handleNextQuestion}
             label={
-              number === releasedQuestions.length - 1 ?
+              number === feedback.questions.length - 1 ?
                 <Link to="/thanks">Submit</Link> :
                 'Next'
             }
