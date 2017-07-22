@@ -69,7 +69,7 @@ class Voting extends Component {
   }
 
   handleSelectResponse = (id, response) => {
-    const responses = this.state.responses
+    const { responses } = this.state
     responses[id] = response
     this.setState({ responses })
   }
@@ -86,7 +86,7 @@ class Voting extends Component {
           <div>
             <Question
               question={feedback.questions[number]}
-              responses={feedback.questions[number].options}
+              responses={responses}
               number={number}
               length={feedback.questions.length}
               onSelect={this.handleSelectResponse}
