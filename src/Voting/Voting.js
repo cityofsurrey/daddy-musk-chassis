@@ -48,9 +48,11 @@ class Voting extends Component {
 
   componentWillReceiveProps = (nextProps) => {
     if (!nextProps.data.loading) {
+      const { feedback } = nextProps.data.feedback
       this.setState({
         loading: false,
-        feedback: nextProps.data.feedback.feedback,
+        feedback,
+        finished: feedback.questions.length === 1,
       })
     }
   }
