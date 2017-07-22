@@ -22,11 +22,11 @@ const styles = {
   },
 }
 
-const Header = ({ length, number, question }) => (
+const Header = ({ length, index, question }) => (
   <div style={styles.root}>
     <div style={styles.headerRow}>
-      <div style={styles.label}>Question {number + 1}</div>
-      <Pagination length={length} index={number} />
+      <div style={styles.label}>Question {index + 1}</div>
+      <Pagination length={length} index={index} />
     </div>
     <div style={styles.question}>{question}</div>
   </div>

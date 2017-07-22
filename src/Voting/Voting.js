@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Radium from 'radium'
 
 import Header from 'components/Header'
-import SecondaryButton from 'components/Buttons/SecondaryButton'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
 import theme from 'theme'
 
@@ -38,53 +37,89 @@ const styles = {
 
 class Voting extends Component {
   state = {
-    number: 0,
+    index: 0,
+    feedback: {
+      questions: [],
+    },
     responses: {},
+    loading: true,
+    finished: false,
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (!nextProps.data.loading) {
+      const { feedback } = nextProps.data.feedback
+      this.setState({
+        loading: false,
+        feedback,
+        finished: feedback.questions.length === 1,
+      })
+    }
+  }
+
+  handleUpdateVote = (questionId, optionId) => {
+    try {
+      this.props.submit({
+        questionId,
+        optionId,
+      })
+      // TODO: what to do with updated question? No need to update page unless
+      // next question is changed
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   handleNextQuestion = () => {
-    const max = this.props.releasedQuestions.length - 1
-    this.setState({
-      number:
-        this.state.number < max ?
-        this.state.number += 1 :
-        max,
-    })
-  }
+    const { index, finished, responses, feedback: { questions } } = this.state
+    const questionId = questions[index].questionId
+    const response = responses[questionId]
 
-  handlePreviousQuestion = () => {
-    this.setState({
-      number:
-        this.state.number ?
-        this.state.number -= 1 :
-        0,
-    })
+    if (response) {
+      const max = questions.length - 1
+      const newIndex = index < max ? index + 1 : max
+      this.setState({
+        index: newIndex,
+        finished: newIndex === max,
+      })
+      this.handleUpdateVote(questionId, response)
+    }
+
+    if (finished) this.props.history.push('/thanks')
   }
 
   handleSelectResponse = (id, response) => {
-    const responses = this.state.responses
+    const { responses } = this.state
     responses[id] = response
     this.setState({ responses })
   }
 
   render() {
-    const { releasedQuestions, questions } = this.props
-    const { number, responses } = this.state
+    const { finished, loading, feedback, index, responses } = this.state
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
         <Header title="Polltal" />
-        <Question
-          question={releasedQuestions[number]}
-          responses={responses}
-          number={number}
-          length={releasedQuestions.length}
-          onSelect={this.handleSelectResponse}
-        />
-        <div style={styles.navBtns}>
-          <SecondaryButton style={styles.navBtn} onClick={this.handlePreviousQuestion} label="Back" />
-          <PrimaryButton style={styles.navBtn} onClick={this.handleNextQuestion} label="Next" />
-        </div>
+        {/* TODO: optimistic UI */}
+        {
+          loading ? <div>Loading...</div> :
+          <div>
+            <Question
+              question={feedback.questions[index]}
+              responses={responses}
+              index={index}
+              length={feedback.questions.length}
+              onSelect={this.handleSelectResponse}
+            />
+            <div style={styles.navBtns}>
+              <PrimaryButton
+                style={styles.navBtn}
+                onClick={this.handleNextQuestion}
+                label={finished ? 'Finish' : 'Next'}
+              />
+            </div>
+          </div>
+        }
       </div>
     )
   }

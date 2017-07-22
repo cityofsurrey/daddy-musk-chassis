@@ -17,11 +17,15 @@ const ReleaseAllQuestions = props => (
     <div>
       Questions are currently not visible to your audience. You can release them all at once or individually.
     </div>
-    <PrimaryButton style={styles.releaseBtn} label="Release All Questions" />
+    <PrimaryButton onClick={props.onReleaseAll} style={styles.releaseBtn} label="Release All Questions" />
   </div>
 )
 
-ReleaseAllQuestions.propTypes = {}
-ReleaseAllQuestions.defaultProps = {}
+ReleaseAllQuestions.propTypes = {
+  onReleaseAll: PropTypes.func,
+}
+ReleaseAllQuestions.defaultProps = {
+  onReleaseAll: () => {},
+}
 
 export default ReleaseAllQuestions

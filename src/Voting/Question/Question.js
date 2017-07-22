@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Radium from 'radium'
 
 import Card from 'components/FlatCard'
-import theme from 'theme'
 
 import Header from './Header'
 import Response from './Response'
@@ -23,22 +22,20 @@ const styles = {
 }
 
 const Question = ({
-  question: { id, question },
+  question: { questionId, question },
   responses,
-  length, number,
+  length, index,
   onSelect,
 }) => (
-  <div>
-    <Card style={styles.card}>
-      <Card style={styles.backgroundCard} />
-      <Header length={length} number={number} question={question} />
-      <Response
-        selected={responses[id]}
-        onSelect={onSelect}
-        id={id}
-      />
-    </Card>
-  </div>
+  <Card style={styles.card}>
+    <Card style={styles.backgroundCard} />
+    <Header length={length} index={index} question={question} />
+    <Response
+      selected={responses[questionId]}
+      onSelect={onSelect}
+      id={questionId}
+    />
+  </Card>
 )
 
 Question.propTypes = {}

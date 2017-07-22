@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { graphql, gql } from 'react-apollo'
 
-import Result from './Result'
+import Dashboard from './Dashboard'
 
 const queryQuestions = gql`
   query feedback($id: String!, $type: String!) {
@@ -32,9 +32,9 @@ const queryConfig = {
   options: props => ({
     variables: {
       id: props.match.params.pollId,
-      type: 'resultId',
+      type: 'dashboardId',
     },
   }),
 }
 
-export default graphql(queryQuestions, queryConfig)(withRouter(Result))
+export default graphql(queryQuestions, queryConfig)(withRouter(Dashboard))

@@ -53,6 +53,7 @@ const styles = {
 const TextField = (props) => {
   const {
     label, name, placeholder, value,
+    id,
     hasHint, optional,
     link,
     tabIndex,
@@ -78,6 +79,7 @@ const TextField = (props) => {
         {link ? <a href style={styles.link} onClick={link} tabIndex="-1">{link}</a> : null}
       </div>
       <input
+        id={id}
         style={[styles.input, inputStyle, errors[name] ? styles.inputError : null]}
         type={type}
         name={name}
@@ -99,6 +101,7 @@ const TextField = (props) => {
 TextField.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
+  id: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -125,6 +128,7 @@ TextField.propTypes = {
 TextField.defaultProps = {
   label: '',
   name: '',
+  id: '',
   placeholder: '',
   value: '',
   disabled: false,

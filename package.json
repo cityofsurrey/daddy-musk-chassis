@@ -129,7 +129,13 @@
         "never"
       ],
       "react/jsx-filename-extension": "off",
-      "max-len": "off"
+      "max-len": "off",
+      "prefer-const": [
+        "error",
+        {
+          "destructuring": "all"
+        }
+      ]
     },
     "settings": {
       "import/resolver": {

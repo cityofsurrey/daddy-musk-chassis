@@ -1,48 +1,80 @@
-import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { graphql, gql } from 'react-apollo'
 
 import Voting from './Voting'
 
 const queryQuestions = gql`
-  query($id: String!) {
-    questions(id: $id) {
-      id
-      questions
+  query feedback($id: String!, $type: String!) {
+    feedback(id: $id, type: $type){
+      feedback {
+        feedbackId
+        dashboardId
+        votingId
+        resultId
+        questions {
+          questionId
+          question
+          options {
+            optionId
+            votes
+            label
+          }
+          status
+        }
+      }
+      error
     }
   }
 `
 
-const queryConfig = props => ({
-  options: {
+const queryConfig = {
+  options: ownProps => ({
     variables: {
-      id: '',
+      id: ownProps.match.params.pollId,
+      type: 'votingId',
     },
-  },
-})
+  }),
+}
 
-const questions = [
-  {
-    "id": "Skdla7NSZ",
-    "question": "How do you feel about the Polltal Presentation?",
-    "responses": [],
-    "released": true
-  },
-  {
-    "id": "BynbaQVBW",
-    "question": "How do you feel about your workload?",
-    "responses": [],
-    "released": true
-  },
-  {
-    "id": "ByW7-NNS-",
-    "question": "How do you feel?",
-    "responses": [],
-    "released": false
-  },
-]
+const mutation = gql`
+    mutation updateVote($voteInput: UpdateVoteInput!) {
+      updateVote(input: $voteInput) {
+        feedback {
+          feedbackId
+          dashboardId
+          votingId
+          resultId
+          questions {
+            question
+            options {
+              optionId
+              label
+              votes
+            }
+            status
+            questionId
+          }
+        }
+        error
+      }
+    }
+  `
+const mutateOptions = {
+  props: ({ mutate }) => ({
+    submit: ({ questionId, optionId }) => mutate({
+      variables: {
+        voteInput: {
+          questionId,
+          optionId,
+        },
+      },
+    }),
+  }),
+}
 
-const releasedQuestions = questions.filter(q => q.released)
+const withMutate = graphql(mutation, mutateOptions)
 
-const votingWithData = props => <Voting releasedQuestions={releasedQuestions} questions={questions} {...props} />
+const VotingWithQuery = graphql(queryQuestions, queryConfig)(withRouter(Voting))
+const VotingWithMutation = withMutate(VotingWithQuery)
 
-export default graphql(queryQuestions, queryConfig())(votingWithData)
+export default VotingWithMutation

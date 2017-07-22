@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import Radium from 'radium'
+import { gql, withApollo } from 'react-apollo'
 
 import SecondaryButton from 'components/Buttons/SecondaryButton'
 import Header from 'components/Header'
@@ -11,7 +12,7 @@ import theme from 'theme'
 import PollLink from './PollLink'
 import ReleaseAllQuestions from './ReleaseAllQuestions'
 import Questions from './Questions'
-import { actions } from '../SurveyCreation/surveyCreation.module'
+import { actions as surveyActions } from '../SurveyCreation/surveyCreation.module'
 
 const styles = {
   root: {
@@ -40,44 +41,98 @@ const styles = {
 }
 
 class Dashboard extends Component {
-  state = {}
+  state = {
+    loading: true,
+    feedback: {},
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (!nextProps.data.loading) {
+      this.setState({
+        loading: false,
+        feedback: nextProps.data.feedback.feedback,
+      })
+    }
+  }
+
+  handleReleaseAllQuestions = async () => this.props.questions.forEach(x => (this.handleReleaseQuestion(x.questionId)))
+
+  handleReleaseQuestion = async (questionId, status = true) => {
+    try {
+      const mutation = {
+        mutation: gql`
+          mutation updateStatus($updateInput: UpdateStatusInput!) {
+            updateStatus(input: $updateInput) {
+              feedback {
+                feedbackId
+                dashboardId
+                votingId
+                resultId
+                questions {
+                  question
+                  options {
+                    optionId
+                    votes
+                    label
+                  }
+                  status
+                  questionId
+                }
+              }
+              error
+            }
+          }
+        `,
+        variables: {
+          updateInput: {
+            questionId,
+            status,
+          },
+        },
+      }
+
+      const { data } = await this.props.client.mutate(mutation)
+      this.setState({
+        feedback: data.updateStatus.feedback,
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
   // TODO: separate container/presentational
   render() {
+    const { history } = this.props
+    const { questions, votingId, resultId } = this.state.feedback
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
         <Header title="Polltal" />
-        <PollLink />
+        <PollLink id={votingId} />
         <div style={styles.questions}>
-          <ReleaseAllQuestions />
+          <ReleaseAllQuestions onReleaseAll={this.handleReleaseAllQuestions} />
           <div style={theme.lineSeparator} />
           <Questions
-            onRelease={this.props.actions.releaseQuestion}
-            questions={this.props.questions}
+            onRelease={this.handleReleaseQuestion}
+            questions={questions}
           />
           <div style={theme.lineSeparator} />
         </div>
-        <SecondaryButton style={styles.resultsBtn} label="Show Results" />
+        <SecondaryButton onClick={() => history.push(`/result/${resultId}`)} style={styles.resultsBtn} label="Show Results" />
       </div>
     )
   }
 }
 
-Dashboard.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.object),
-  actions: PropTypes.objectOf(PropTypes.func),
-}
-Dashboard.defaultProps = {
-  questions: [],
-  actions: {},
-}
+Dashboard.propTypes = {}
+Dashboard.defaultProps = {}
 
-const mapStateToProps = state => ({
-  questions: state.survey.questions,
-})
+// const mapStateToProps = ({ survey }) => ({
+//   ...survey,
+//   questions: survey.questions,
+// })
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ ...actions }, dispatch),
+  actions: bindActionCreators({ ...surveyActions }, dispatch),
 })
 
-export default Radium(connect(mapStateToProps, mapDispatchToProps)(Dashboard))
+export default Radium(connect(() => ({}), mapDispatchToProps)(withApollo(Dashboard)))

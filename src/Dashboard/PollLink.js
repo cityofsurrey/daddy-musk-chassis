@@ -26,25 +26,31 @@ const styles = {
   },
 }
 
-const PollLink = ({ value }) => (
+const copyToClipboard = () => {
+  document.querySelector('#pollLink').select()
+  document.execCommand('copy')
+}
+
+const PollLink = ({ id }) => (
   <FlatCard>
     <div style={[styles.congratsMsg, styles.title]}>Congratulations!</div>
     <div style={styles.title}>Your poll has been created.</div>
     <div style={styles.link}>
       <TextField
+        id="pollLink"
         inputStyle={styles.inputStyle}
-        value={value}
+        value={`http://localhost:8090/voting/${id}`}
       />
     </div>
-    <PrimaryButton label="Copy Poll Link" />
+    <PrimaryButton onClick={copyToClipboard} label="Copy Poll Link" />
   </FlatCard>
 )
 
 PollLink.propTypes = {
-  value: PropTypes.string,
+  id: PropTypes.string,
 }
 PollLink.defaultProps = {
-  value: 'https://www.polltal/poll1.com',
+  id: '',
 }
 
 export default Radium(PollLink)

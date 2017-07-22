@@ -11,3 +11,11 @@ export default [
   { src: unsatisfied, label: 'Unsatisfied', value: 'unsatisfied' },
   { src: veryUnsatisfied, label: 'Very Unsatisfied', value: 'veryUnsatisfied' },
 ]
+
+export const icons = {
+  verySatisfied,
+  satisfied,
+  indifferent,
+  unsatisfied,
+  veryUnsatisfied,
+}

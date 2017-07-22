@@ -31,6 +31,8 @@ const styles = {
   },
 }
 
+const calculatePercentage = (value, length) => (value / length ? value / length : 0)
+
 const Responses = ({ length, responseValues }) => (
   <div style={styles.root}>
     {
@@ -38,8 +40,10 @@ const Responses = ({ length, responseValues }) => (
         <div style={styles.row} key={value}>
           <img style={styles.image} src={src} alt={label} />
           <div style={styles.measurement}>
-            <Bar percentage={(responseValues[value] / length)} />
-            <div style={styles.percent}>{responseValues[value]}%</div>
+            <Bar percentage={calculatePercentage(responseValues[value], length)} />
+            <div style={styles.percent}>
+              {calculatePercentage(responseValues[value], length) * 100}%
+            </div>
           </div>
         </div>
       ))

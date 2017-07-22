@@ -26,17 +26,32 @@ const styles = {
 }
 
 class Result extends Component {
-  state = {}
+  state = {
+    loading: true,
+    feedback: {},
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (!nextProps.data.loading) {
+      this.setState({
+        loading: false,
+        feedback: nextProps.data.feedback.feedback,
+      })
+    }
+  }
 
   render() {
-    const { questions } = this.props
+    const questions = this.state.loading ? [] : this.state.feedback.questions
+
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
         <Header title="Polltal" />
         {
           questions.map((question, index) => (
-            <Question key={question.id} question={question} number={index} />
+            question.status
+              ? <Question key={question.questionId} question={question} number={index} />
+              : null
           ))
         }
       </div>

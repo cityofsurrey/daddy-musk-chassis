@@ -6,9 +6,11 @@ import Dashboard from './Dashboard'
 import SurveyCreation from './SurveyCreation'
 import Voting from './Voting'
 import Result from './Result'
+import Thanks from './Thanks'
 
 const styles = {
   position: 'relative',
+  overflowX: 'hidden',
 }
 
 export default () => (
@@ -16,9 +18,10 @@ export default () => (
     <Router>
       <div style={styles}>
         <Route exact path="/" component={SurveyCreation} />
-        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/dashboard/:pollId" component={Dashboard} />
         <Route path="/voting/:pollId" component={Voting} />
         <Route path="/result/:pollId" component={Result} />
+        <Route path="/thanks" component={Thanks} />
       </div>
     </Router>
   </StyleRoot>
