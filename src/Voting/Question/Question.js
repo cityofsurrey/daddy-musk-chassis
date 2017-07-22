@@ -24,12 +24,12 @@ const styles = {
 const Question = ({
   question: { questionId, question },
   responses,
-  length, number,
+  length, index,
   onSelect,
 }) => (
   <Card style={styles.card}>
     <Card style={styles.backgroundCard} />
-    <Header length={length} number={number} question={question} />
+    <Header length={length} index={index} question={question} />
     <Response
       selected={responses[questionId]}
       onSelect={onSelect}

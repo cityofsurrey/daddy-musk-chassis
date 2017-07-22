@@ -36,4 +36,40 @@ const queryConfig = {
   }),
 }
 
-export default graphql(queryQuestions, queryConfig)(withRouter(Voting))
+const mutation = gql`
+    mutation updateVote($voteInput: UpdateVoteInput!) {
+      updateVote(input: $voteInput) {
+        feedback {
+          feedbackId
+          dashboardId
+          votingId
+          resultId
+          questions {
+            question
+            options {
+              optionId
+              label
+              votes
+            }
+            status
+            questionId
+          }
+        }
+        error
+      }
+    }
+  `
+const mutateOptions = {
+  options: ({ questionId, optionId }) => ({
+    variables: {
+      questionId,
+      optionId,
+    },
+  }),
+}
+
+const VotingWithQuery = graphql(queryQuestions, queryConfig)(withRouter(Voting))
+const withMutate = graphql(mutation, mutateOptions)
+const VotingWithMutation = withMutate(VotingWithQuery)
+
+export default VotingWithMutation

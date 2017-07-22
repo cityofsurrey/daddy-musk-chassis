@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Radium from 'radium'
-import { Link } from 'react-router-dom'
 
 import Header from 'components/Header'
 import PrimaryButton from 'components/Buttons/PrimaryButton'
@@ -38,12 +37,13 @@ const styles = {
 
 class Voting extends Component {
   state = {
-    number: 0,
+    index: 0,
     feedback: {
       questions: [],
     },
     responses: {},
     loading: true,
+    finished: false,
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -55,21 +55,35 @@ class Voting extends Component {
     }
   }
 
-  handleNextQuestion = () => {
-    const { number, responses, feedback: { questions } } = this.state
-    if (responses[questions[number].questionId]) {
-      const max = questions.length - 1
-      this.setState({
-        number:
-        this.state.number < max ?
-        this.state.number += 1 :
-        max,
+  handleUpdateVote = (questionId, optionId) => {
+    try {
+      this.props.mutate({
+        questionId,
+        optionId,
       })
+      // TODO: what to do with updated question? No need to update page unless
+      // next question is changed
+    } catch (err) {
+      console.log(err)
     }
   }
 
-  handleSubmit = () => {
+  handleNextQuestion = () => {
+    const { index, finished, responses, feedback: { questions } } = this.state
+    const questionId = questions[index].questionId
+    const response = responses[questionId]
 
+    if (response) {
+      const max = questions.length - 1
+      const newIndex = index < max ? index + 1 : max
+      this.setState({
+        index: newIndex,
+        finished: newIndex === max,
+      })
+      this.handleUpdateVote(questionId, response)
+    }
+
+    if (finished) this.props.history.push('/thanks')
   }
 
   handleSelectResponse = (id, response) => {
@@ -79,7 +93,7 @@ class Voting extends Component {
   }
 
   render() {
-    const { loading, feedback, number, responses } = this.state
+    const { finished, loading, feedback, index, responses } = this.state
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
@@ -89,25 +103,17 @@ class Voting extends Component {
           loading ? <div>Loading...</div> :
           <div>
             <Question
-              question={feedback.questions[number]}
+              question={feedback.questions[index]}
               responses={responses}
-              number={number}
+              index={index}
               length={feedback.questions.length}
               onSelect={this.handleSelectResponse}
             />
             <div style={styles.navBtns}>
               <PrimaryButton
                 style={styles.navBtn}
-                onClick={
-                  number === feedback.questions.length - 1 ?
-                  this.handleSubmit :
-                  this.handleNextQuestion
-                }
-                label={
-                  number === feedback.questions.length - 1 ?
-                    'Submit' :
-                    'Next'
-                }
+                onClick={this.handleNextQuestion}
+                label={finished ? 'Finish' : 'Next'}
               />
             </div>
           </div>
