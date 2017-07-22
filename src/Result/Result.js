@@ -29,14 +29,15 @@ class Result extends Component {
   state = {}
 
   render() {
-    const { questions } = this.props
+    const questions = this.props.data.feedback ? this.props.data.feedback.feedback.questions : []
+
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
         <Header title="Polltal" />
         {
           questions.map((question, index) => (
-            <Question key={question.id} question={question} number={index} />
+            <Question key={question.questionId} question={question} number={index} />
           ))
         }
       </div>
@@ -44,7 +45,11 @@ class Result extends Component {
   }
 }
 
-Result.propTypes = {}
-Result.defaultProps = {}
+Result.propTypes = {
+  data: PropTypes.objectOf(PropTypes.object),
+}
+Result.defaultProps = {
+  data: {},
+}
 
 export default Radium(Result)

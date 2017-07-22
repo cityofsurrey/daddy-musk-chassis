@@ -21,11 +21,11 @@ const styles = {
   },
 }
 
-const Header = ({ number, question }) => (
+const Header = ({ number, question, voteCount }) => (
   <div style={styles.root}>
     <div style={styles.headerRow}>
       <div style={styles.label}>Question {number + 1}</div>
-      <div style={styles.label}>{question.responses.length} voted</div>
+      <div style={styles.label}>{voteCount} voted</div>
     </div>
     <div style={styles.question}>{question.question}</div>
   </div>

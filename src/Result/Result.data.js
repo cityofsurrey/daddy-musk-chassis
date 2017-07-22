@@ -1,46 +1,40 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { graphql, gql } from 'react-apollo'
 
 import Result from './Result'
 
 const queryQuestions = gql`
-  query($id: String!) {
-    questions(id: $id) {
-      id
-      questions
+  query feedback($id: String!, $type: String!) {
+    feedback(id: $id, type: $type){
+      feedback {
+        feedbackId
+        dashboardId
+        votingId
+        resultId
+        questions {
+          questionId
+          question
+          options {
+            optionId
+            votes
+            label
+          }
+          status
+        }
+      }
+      error
     }
   }
 `
 
-const queryConfig = props => ({
-  options: {
+const queryConfig = {
+  options: props => ({
     variables: {
-      id: '',
+      id: props.match.params.pollId,
+      type: 'resultId',
     },
-  },
-})
+  }),
+}
 
-const questions = [
-  {
-    "id": "Skdla7NSZ",
-    "question": "How do you feel about the Polltal Presentation?",
-    "responses": Array(20).fill('unsatisfied', 0, 4).fill('satisfied', 4, 10).fill('verySatisfied', 10, 20),
-    "released": true
-  },
-  {
-    "id": "BynbaQVBW",
-    "question": "How do you feel about your workload?",
-    "responses": [],
-    "released": true
-  },
-  {
-    "id": "ByW7-NNS-",
-    "question": "How do you feel?",
-    "responses": [],
-    "released": false
-  },
-]
-
-const resultWithData = props => <Result questions={questions} {...props} />
-
-export default graphql(queryQuestions, queryConfig())(resultWithData)
+export default graphql(queryQuestions, queryConfig)(withRouter(Result))
