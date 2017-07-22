@@ -43,21 +43,21 @@ class Voting extends Component {
       questions: [],
     },
     responses: {},
+    loading: true,
   }
 
   componentWillReceiveProps = (nextProps) => {
-    if (nextProps.data.loading) {
-      this.setState({ feedback: {
-        questions: [],
-      } })
-    } else {
-      this.setState({ feedback: nextProps.data.feedback.feedback })
+    if (!nextProps.data.loading) {
+      this.setState({
+        loading: false,
+        feedback: nextProps.data.feedback.feedback,
+      })
     }
   }
 
   handleNextQuestion = () => {
     const { number, responses, feedback: { questions } } = this.state
-    if (responses[questions[number].id]) {
+    if (responses[questions[number].questionId]) {
       const max = questions.length - 1
       this.setState({
         number:
@@ -75,29 +75,35 @@ class Voting extends Component {
   }
 
   render() {
-    const { feedback, number, responses } = this.state
+    const { loading, feedback, number, responses } = this.state
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
         <Header title="Polltal" />
-        <Question
-          question={feedback.questions[number]}
-          responses={feedback.questions[number].options}
-          number={number}
-          length={feedback.questions.length}
-          onSelect={this.handleSelectResponse}
-        />
-        <div style={styles.navBtns}>
-          <PrimaryButton
-            style={styles.navBtn}
-            onClick={this.handleNextQuestion}
-            label={
-              number === feedback.questions.length - 1 ?
-                <Link to="/thanks">Submit</Link> :
-                'Next'
-            }
-          />
-        </div>
+        {/* TODO: optimistic UI */}
+        {
+          loading ? <div>Loading...</div> :
+          <div>
+            <Question
+              question={feedback.questions[number]}
+              responses={feedback.questions[number].options}
+              number={number}
+              length={feedback.questions.length}
+              onSelect={this.handleSelectResponse}
+            />
+            <div style={styles.navBtns}>
+              <PrimaryButton
+                style={styles.navBtn}
+                onClick={this.handleNextQuestion}
+                label={
+                  number === feedback.questions.length - 1 ?
+                    <Link to="/thanks">Submit</Link> :
+                    'Next'
+                }
+              />
+            </div>
+          </div>
+        }
       </div>
     )
   }

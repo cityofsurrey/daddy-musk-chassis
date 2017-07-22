@@ -30,7 +30,7 @@ const styles = {
   },
 }
 
-const Responses = ({ selected, onSelect, id }) => (
+const Response = ({ selected, onSelect, id }) => (
   <div>
     {
       images.map(({ src, label, value }, index) => (
@@ -50,11 +50,11 @@ const Responses = ({ selected, onSelect, id }) => (
   </div>
 )
 
-Responses.propTypes = {
+Response.propTypes = {
   selected: PropTypes.string,
 }
-Responses.defaultProps = {
+Response.defaultProps = {
   selected: '',
 }
 
-export default Radium(Responses)
+export default Radium(Response)
