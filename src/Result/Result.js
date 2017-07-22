@@ -26,10 +26,22 @@ const styles = {
 }
 
 class Result extends Component {
-  state = {}
+  state = {
+    loading: true,
+    feedback: {},
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (!nextProps.data.loading) {
+      this.setState({
+        loading: false,
+        feedback: nextProps.data.feedback.feedback,
+      })
+    }
+  }
 
   render() {
-    const questions = this.props.data.feedback ? this.props.data.feedback.feedback.questions : []
+    const questions = this.state.loading ? [] : this.state.feedback.questions
 
     return (
       <div style={styles.root}>
@@ -47,11 +59,7 @@ class Result extends Component {
   }
 }
 
-Result.propTypes = {
-  data: PropTypes.objectOf(PropTypes.object),
-}
-Result.defaultProps = {
-  data: {},
-}
+Result.propTypes = {}
+Result.defaultProps = {}
 
 export default Radium(Result)

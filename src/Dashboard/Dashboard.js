@@ -41,21 +41,23 @@ const styles = {
 }
 
 class Dashboard extends Component {
-  state = {}
+  state = {
+    loading: true,
+    feedback: {},
+  }
 
   componentWillReceiveProps = (nextProps) => {
     if (!nextProps.data.loading) {
-      const { actions: { createSurvey } } = this.props
-      const feedback = nextProps.data.feedback ? nextProps.data.feedback.feedback : null
-
-      createSurvey(feedback)
+      this.setState({
+        loading: false,
+        feedback: nextProps.data.feedback.feedback,
+      })
     }
   }
 
   handleReleaseAllQuestions = async () => this.props.questions.forEach(x => (this.handleReleaseQuestion(x.questionId)))
 
   handleReleaseQuestion = async (questionId, status = true) => {
-    const { actions: { releaseQuestion } } = this.props
     try {
       const mutation = {
         mutation: gql`
@@ -89,15 +91,18 @@ class Dashboard extends Component {
         },
       }
 
-      await this.props.client.mutate(mutation)
-      releaseQuestion(questionId)
+      const { data } = await this.props.client.mutate(mutation)
+      this.setState({
+        feedback: data.updateStatus.feedback,
+      })
     } catch (err) {
       console.log(err)
     }
   }
   // TODO: separate container/presentational
   render() {
-    const { actions, questions, votingId, resultId, history } = this.props
+    const { history } = this.props
+    const { questions, votingId, resultId } = this.state.feedback
     return (
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
@@ -118,24 +123,16 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.object),
-  actions: PropTypes.objectOf(PropTypes.func),
-  votingId: PropTypes.string,
-}
-Dashboard.defaultProps = {
-  questions: [],
-  actions: {},
-  votingId: '',
-}
+Dashboard.propTypes = {}
+Dashboard.defaultProps = {}
 
-const mapStateToProps = ({ survey }) => ({
-  ...survey,
-  questions: survey.questions,
-})
+// const mapStateToProps = ({ survey }) => ({
+//   ...survey,
+//   questions: survey.questions,
+// })
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ ...surveyActions }, dispatch),
 })
 
-export default Radium(connect(mapStateToProps, mapDispatchToProps)(withApollo(Dashboard)))
+export default Radium(connect(() => ({}), mapDispatchToProps)(withApollo(Dashboard)))

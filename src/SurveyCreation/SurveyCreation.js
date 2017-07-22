@@ -53,8 +53,8 @@ class SurveyCreation extends Component {
 
   handleCreateSurvey = async () => {
     const { questions } = this.state
-    if (!questions.length) return
     const ids = Object.keys(questions)
+    if (ids.length === 1 && questions[ids[0]].question === '') return
     const filterEmpty = ids.filter((i) => {
       if (questions[i].question === '') return false
       return true
