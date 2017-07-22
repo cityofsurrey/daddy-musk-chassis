@@ -68,6 +68,10 @@ class Voting extends Component {
     }
   }
 
+  handleSubmit = () => {
+
+  }
+
   handleSelectResponse = (id, response) => {
     const { responses } = this.state
     responses[id] = response
@@ -94,10 +98,14 @@ class Voting extends Component {
             <div style={styles.navBtns}>
               <PrimaryButton
                 style={styles.navBtn}
-                onClick={this.handleNextQuestion}
+                onClick={
+                  number === feedback.questions.length - 1 ?
+                  this.handleSubmit :
+                  this.handleNextQuestion
+                }
                 label={
                   number === feedback.questions.length - 1 ?
-                    <Link to="/thanks">Submit</Link> :
+                    'Submit' :
                     'Next'
                 }
               />
