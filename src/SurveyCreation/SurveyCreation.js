@@ -54,6 +54,7 @@ class SurveyCreation extends Component {
   handleCreateSurvey = async () => {
     const { questions } = this.state
     const ids = Object.keys(questions)
+    // don't send on empty first question
     if (ids.length === 1 && questions[ids[0]].question === '') return
     const filterEmpty = ids.filter((i) => {
       if (questions[i].question === '') return false
@@ -127,7 +128,7 @@ class SurveyCreation extends Component {
   }
 
   handleAddQuestions = () => {
-    // generate id for dynamic controlled input
+    // generate id for controlled input
     const id = generate()
     this.setState({
       questions: update(this.state.questions, { $merge: {
@@ -135,7 +136,7 @@ class SurveyCreation extends Component {
           id,
           question: '',
           reponses: [],
-          released: false,
+          released: true,
         },
       } }),
     })
