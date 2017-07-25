@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Radium from 'radium'
 import { connect } from 'react-redux'
 import { gql, withApollo } from 'react-apollo'
 import { bindActionCreators } from 'redux'
@@ -29,6 +30,10 @@ const styles = {
     backgroundColor: theme.color.blue.primary,
     borderBottomLeftRadius: '50%',
     borderBottomRightRadius: '50%',
+    '@media (min-width: 768px)': {
+      height: 440,
+      transform: 'scaleX(1.1)',
+    },
   },
   generateBtn: {
     margin: '30px 0 20px',
@@ -183,4 +188,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   () => ({}),
   mapDispatchToProps,
-)(withApollo(SurveyCreation))
+)(withApollo(Radium(SurveyCreation)))

@@ -10,6 +10,10 @@ const styles = {
     margin: '40px 0 15px',
     padding: 20,
   },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
   inputStyle: {
     borderRadius: 100,
     padding: '10px 20px',
@@ -22,7 +26,7 @@ const Email = ({
 }) => (
   <FlatCard style={styles.root}>
     <div>
-      <div>Enter your email to receive your poll</div>
+      <div style={styles.title}>Enter your email to receive links to your poll</div>
       <TextField
         value={email}
         name="email"

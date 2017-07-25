@@ -10,7 +10,7 @@ import Thanks from './Thanks'
 
 const styles = {
   overflowX: 'hidden',
-  maxWidth: 440,
+  maxWidth: 460,
   margin: '0 auto',
 }
 

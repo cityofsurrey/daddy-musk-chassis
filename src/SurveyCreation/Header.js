@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import Radium from 'radium'
 
 import FlatCard from 'components/FlatCard'
 import images from 'utils/images'
@@ -12,6 +12,9 @@ const styles = {
   name: {
     fontSize: 32,
     fontWeight: 'bold',
+    '@media (min-width: 768px)': {
+      fontSize: 48,
+    },
   },
   slogan: {
     fontSize: 22,
@@ -20,22 +23,32 @@ const styles = {
   },
   desc: {
     fontSize: 12,
+    '@media (min-width: 768px)': {
+      fontSize: 18,
+    },
   },
   facesCard: {
     padding: 5,
     borderRadius: 100,
+    '@media (min-width: 768px)': {
+      padding: '10px 15px',
+    },
   },
   faces: {
     display: 'flex',
     justifyContent: 'space-around',
   },
   face: {
-    width: 36,
-    height: 36,
+    width: 35,
+    height: 35,
+    '@media (min-width: 768px)': {
+      width: 60,
+      height: 60,
+    },
   },
 }
 
-const Header = props => (
+const Header = () => (
   <div style={styles.root}>
     <div style={styles.name}>Polltal</div>
     <div style={styles.slogan}>Create your poll now</div>
@@ -48,7 +61,4 @@ const Header = props => (
   </div>
 )
 
-Header.propTypes = {}
-Header.defaultProps = {}
-
-export default Header
+export default Radium(Header)

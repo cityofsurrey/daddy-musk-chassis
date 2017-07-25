@@ -9,6 +9,13 @@ import SecondaryButton from 'components/Buttons/SecondaryButton'
 const styles = {
   root: {
     textAlign: 'center',
+    padding: '30px 20px',
+    '@media (min-width: 768px)': {
+      padding: 30,
+    },
+  },
+  card: {
+    padding: 0,
   },
   title: {
     margin: '0 0 30px',
@@ -26,7 +33,7 @@ const styles = {
 const SurveyQuestions = ({
   questions, addQuestion, onChange,
 }) => (
-  <FlatCard>
+  <FlatCard style={styles.card}>
     <div style={styles.root}>
       <div style={styles.title}>Enter questions to start your poll</div>
       {
