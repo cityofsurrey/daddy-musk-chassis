@@ -46,6 +46,10 @@ class Dashboard extends Component {
     feedback: {},
   }
 
+  componentWillMount = () => {
+    window.scrollTo(0, 0)
+  }
+
   componentWillReceiveProps = (nextProps) => {
     if (!nextProps.data.loading) {
       this.setState({
@@ -55,7 +59,11 @@ class Dashboard extends Component {
     }
   }
 
-  handleReleaseAllQuestions = async () => this.props.questions.forEach(x => (this.handleReleaseQuestion(x.questionId)))
+  handleReleaseAllQuestions = async () => {
+    this.state.feedback.questions.forEach((x) => {
+      if (!x.status) this.handleReleaseQuestion(x.questionId)
+    })
+  }
 
   handleReleaseQuestion = async (questionId, status = true) => {
     try {

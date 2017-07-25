@@ -14,7 +14,7 @@ import './app.css'
 const createClient = () => (
   new ApolloClient({
     networkInterface: createNetworkInterface({
-      uri: 'http://localhost:8080/graphql',
+      uri: 'http://localhost:8000/graphql',
     }),
     // networkInterface: createBatchingNetworkInterface({
     //   uri: 'http://localhost:8080/graphql',
