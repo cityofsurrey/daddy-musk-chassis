@@ -16,29 +16,53 @@ const styles = {
     width: '95%',
     margin: 0,
     top: -10,
-    left: '2.5%', // (parent Card width - this.width) / 2
+    left: '2.5%',
     zIndex: -5,
   },
 }
 
 const Question = ({
-  question: { questionId, question },
+  question,
   responses,
   length, index,
   onSelect,
 }) => (
   <Card style={styles.card}>
-    <Card style={styles.backgroundCard} />
-    <Header length={length} index={index} question={question} />
-    <Response
-      selected={responses[questionId]}
-      onSelect={onSelect}
-      id={questionId}
-    />
+    {
+      question ? (
+        <div>
+          <Card style={styles.backgroundCard} />
+          <Header length={length} index={index} question={question.question} />
+          <Response
+            selected={responses[question.questionId]}
+            onSelect={onSelect}
+            id={question.questionId}
+          />
+        </div>
+      ) :
+        <div>No questions are released...</div>
+    }
   </Card>
 )
 
-Question.propTypes = {}
-Question.defaultProps = {}
+Question.propTypes = {
+  question: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.string,
+    PropTypes.bool,
+  ])),
+  responses: PropTypes.objectOf(PropTypes.string),
+  length: PropTypes.number,
+  index: PropTypes.number,
+  onSelect: PropTypes.func,
+}
+Question.defaultProps = {
+  question: null,
+  responses: {},
+  length: 0,
+  index: 0,
+  onSelect: () => {},
+}
 
 export default Radium(Question)

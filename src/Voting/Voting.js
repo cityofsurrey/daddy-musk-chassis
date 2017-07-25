@@ -51,7 +51,11 @@ class Voting extends Component {
       const { feedback } = nextProps.data.feedback
       this.setState({
         loading: false,
-        feedback,
+        feedback: {
+          ...feedback,
+          // only show status === true questions
+          questions: feedback.questions.filter(q => q.status),
+        },
         finished: feedback.questions.length === 1,
       })
     }
@@ -63,14 +67,15 @@ class Voting extends Component {
         questionId,
         optionId,
       })
-      // TODO: what to do with updated question? No need to update page unless
-      // next question is changed
     } catch (err) {
       console.log(err)
     }
   }
 
   handleNextQuestion = () => {
+    // TODO: change question text when no questions
+    if (!this.state.feedback.questions.length) return
+
     const { index, finished, responses, feedback: { questions } } = this.state
     const questionId = questions[index].questionId
     const response = responses[questionId]
@@ -84,7 +89,6 @@ class Voting extends Component {
       })
       this.handleUpdateVote(questionId, response)
     }
-
     if (finished) this.props.history.push('/thanks')
   }
 
