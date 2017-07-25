@@ -6,6 +6,7 @@ import Header from 'components/Header'
 import theme from 'theme'
 
 import Question from './Question'
+import Navbar from './Navbar'
 
 const styles = {
   root: {
@@ -47,6 +48,7 @@ class Result extends Component {
       <div style={styles.root}>
         <div style={styles.backgroundHeader} />
         <Header title="Polltal" />
+        <Navbar dashboardId={this.state.feedback.dashboardId} />
         {
           questions.map((question, index) => (
             question.status
