@@ -9,8 +9,9 @@ import Result from './Result'
 import Thanks from './Thanks'
 
 const styles = {
-  position: 'relative',
   overflowX: 'hidden',
+  maxWidth: 440,
+  margin: '0 auto',
 }
 
 export default () => (
