@@ -31,6 +31,9 @@ const styles = {
     borderBottomLeftRadius: '50%',
     borderBottomRightRadius: '50%',
   },
+  questionTitle: {
+    margin: '40px 0 0',
+  },
   questions: {
     padding: '0 20px',
   },
@@ -117,7 +120,8 @@ class Dashboard extends Component {
         <Header title="Polltal" />
         <PollLink id={votingId} />
         <div style={styles.questions}>
-          <ReleaseAllQuestions onReleaseAll={this.handleReleaseAllQuestions} />
+          {/* <ReleaseAllQuestions onReleaseAll={this.handleReleaseAllQuestions} /> */}
+          <div style={styles.questionTitle}>Poll Questions</div>
           <div style={theme.lineSeparator} />
           <Questions
             onRelease={this.handleReleaseQuestion}

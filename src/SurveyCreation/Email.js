@@ -7,12 +7,23 @@ import TextField from 'components/TextField'
 
 const styles = {
   root: {
-    margin: '40px 0 15px',
     padding: 20,
+    '@media (min-width: 1024px)': {
+      padding: '50px 60px',
+    },
+  },
+  card: {
+    margin: '40px 0 15px',
+    padding: 0,
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
+    '@media (min-width: 1024px)': {
+      fontSize: 22,
+      textAlign: 'left',
+      margin: '0 0 10px',
+    },
   },
   inputStyle: {
     borderRadius: 100,
@@ -24,8 +35,8 @@ const Email = ({
   email,
   onChange,
 }) => (
-  <FlatCard style={styles.root}>
-    <div>
+  <FlatCard style={styles.card}>
+    <div style={styles.root}>
       <div style={styles.title}>Enter your email to receive links to your poll</div>
       <TextField
         value={email}

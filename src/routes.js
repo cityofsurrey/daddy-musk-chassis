@@ -12,6 +12,9 @@ const styles = {
   overflowX: 'hidden',
   maxWidth: 460,
   margin: '0 auto',
+  '@media (min-width: 1024px)': {
+    maxWidth: 625,
+  },
 }
 
 export default () => (
