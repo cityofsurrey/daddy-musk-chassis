@@ -8,7 +8,7 @@ import TextField from 'components/TextField'
 const styles = {
   root: {
     padding: 20,
-    '@media (min-width: 1024px)': {
+    '@media (min-width: 1150px)': {
       padding: '50px 60px',
     },
   },
@@ -19,7 +19,7 @@ const styles = {
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    '@media (min-width: 1024px)': {
+    '@media (min-width: 1150px)': {
       fontSize: 22,
       textAlign: 'left',
       margin: '0 0 10px',

@@ -18,6 +18,12 @@ const styles = {
   root: {
     padding: '40px 15px',
     textAlign: 'center',
+    overflowX: 'hidden',
+    maxWidth: 460,
+    margin: '0 auto',
+    '@media (min-width: 1150px)': {
+      maxWidth: 625,
+    },
   },
   backgroundHeader: {
     position: 'absolute',

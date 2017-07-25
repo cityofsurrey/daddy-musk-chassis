@@ -10,7 +10,7 @@ import theme from 'theme'
 
 const styles = {
   content: {
-    '@media (min-width: 1024px)': {
+    '@media (min-width: 1150px)': {
       padding: '0 60px',
     },
   },
@@ -23,7 +23,7 @@ const styles = {
     margin: '5px 0',
   },
   link: {
-    '@media (min-width: 1024px)': {
+    '@media (min-width: 1150px)': {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -31,7 +31,7 @@ const styles = {
   },
   input: {
     margin: '10px 0 20px',
-    '@media (min-width: 1024px)': {
+    '@media (min-width: 1150px)': {
       margin: '10px 20px',
       flex: 1,
     },

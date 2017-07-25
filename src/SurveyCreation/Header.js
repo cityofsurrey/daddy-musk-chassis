@@ -45,7 +45,7 @@ const styles = {
       width: 60,
       height: 60,
     },
-    '@media (min-width: 1024px)': {
+    '@media (min-width: 1150px)': {
       width: 80,
       height: 80,
     },

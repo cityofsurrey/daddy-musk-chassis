@@ -6,7 +6,7 @@ const styles = {
   root: {
     textAlign: 'center',
     margin: '5px 0 40px',
-    '@media (min-width: 1024px)': {
+    '@media (min-width: 1150px)': {
       margin: '5px 0 100px',
     },
   },

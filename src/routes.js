@@ -9,12 +9,12 @@ import Result from './Result'
 import Thanks from './Thanks'
 
 const styles = {
-  overflowX: 'hidden',
-  maxWidth: 460,
-  margin: '0 auto',
-  '@media (min-width: 1024px)': {
-    maxWidth: 625,
-  },
+  // overflowX: 'hidden',
+  // maxWidth: 460,
+  // margin: '0 auto',
+  // '@media (min-width: 1150px)': {
+  //   maxWidth: 625,
+  // },
 }
 
 export default () => (
