@@ -153,4 +153,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ ...surveyActions }, dispatch),
 })
 
-export default Radium(connect(() => ({}), mapDispatchToProps)(withApollo(Dashboard)))
+export default connect(() => ({}), mapDispatchToProps)(withApollo(Radium(Dashboard)))
