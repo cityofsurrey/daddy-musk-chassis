@@ -2,14 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Radium from 'radium'
 
-import Card from 'components/FlatCard'
+import FlatCard from 'components/FlatCard'
 
 import Header from './Header'
 import Response from './Response'
 
 const styles = {
   card: {
+    padding: 0,
+  },
+  content: {
     padding: '20px 20px 10px',
+    '@media (min-width: 1150px)': {
+      padding: '70px 50px',
+    },
   },
   backgroundCard: {
     position: 'absolute',
@@ -18,6 +24,9 @@ const styles = {
     top: -10,
     left: '2.5%',
     zIndex: -5,
+    '@media (min-width: 1150px)': {
+      display: 'none',
+    },
   },
 }
 
@@ -27,22 +36,24 @@ const Question = ({
   length, index,
   onSelect,
 }) => (
-  <Card style={styles.card}>
-    {
-      question ? (
-        <div>
-          <Card style={styles.backgroundCard} />
-          <Header length={length} index={index} question={question.question} />
-          <Response
-            selected={responses[question.questionId]}
-            onSelect={onSelect}
-            id={question.questionId}
-          />
-        </div>
-      ) :
-        <div>No questions are released...</div>
-    }
-  </Card>
+  <FlatCard style={styles.card}>
+    <div style={styles.content}>
+      {
+        question ? (
+          <div>
+            <FlatCard style={styles.backgroundCard} />
+            <Header length={length} index={index} question={question.question} />
+            <Response
+              selected={responses[question.questionId]}
+              onSelect={onSelect}
+              id={question.questionId}
+            />
+          </div>
+        ) :
+          <div>No questions are released...</div>
+      }
+    </div>
+  </FlatCard>
 )
 
 Question.propTypes = {

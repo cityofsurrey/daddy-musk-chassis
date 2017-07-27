@@ -10,8 +10,12 @@ const styles = {
   root: {
     textAlign: 'center',
     padding: '30px 20px',
-    '@media (min-width: 768px)': {
+    '@media (min-width: 768px) and (max-width: 1150px)': {
       padding: 30,
+    },
+    '@media (min-width: 1150px)': {
+      padding: '50px 60px',
+      textAlign: 'left',
     },
   },
   card: {
@@ -19,6 +23,9 @@ const styles = {
   },
   title: {
     margin: '0 0 30px',
+    '@media (min-width: 1150px)': {
+      fontSize: 24,
+    },
   },
   label: {
     fontSize: 22,

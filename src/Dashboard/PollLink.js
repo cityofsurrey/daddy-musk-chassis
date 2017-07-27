@@ -9,6 +9,11 @@ import PrimaryButton from 'components/Buttons/PrimaryButton'
 import theme from 'theme'
 
 const styles = {
+  content: {
+    '@media (min-width: 1150px)': {
+      padding: '0 60px',
+    },
+  },
   title: {
     color: theme.color.purple.regular,
   },
@@ -18,7 +23,18 @@ const styles = {
     margin: '5px 0',
   },
   link: {
+    '@media (min-width: 1150px)': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+  },
+  input: {
     margin: '10px 0 20px',
+    '@media (min-width: 1150px)': {
+      margin: '10px 20px',
+      flex: 1,
+    },
   },
   inputStyle: {
     borderRadius: 100,
@@ -33,16 +49,20 @@ const copyToClipboard = () => {
 
 const PollLink = ({ id }) => (
   <FlatCard>
-    <div style={[styles.congratsMsg, styles.title]}>Congratulations!</div>
-    <div style={styles.title}>Your poll has been created.</div>
-    <div style={styles.link}>
-      <TextField
-        id="pollLink"
-        inputStyle={styles.inputStyle}
-        value={`http://localhost:8090/voting/${id}`}
-      />
+    <div style={styles.content}>
+      <div style={[styles.congratsMsg, styles.title]}>Congratulations!</div>
+      <div style={styles.title}>Your poll has been created.</div>
+      <div style={styles.link}>
+        <div style={styles.input}>
+          <TextField
+            id="pollLink"
+            inputStyle={styles.inputStyle}
+            value={`http://localhost:8090/voting/${id}`}
+          />
+        </div>
+        <PrimaryButton onClick={copyToClipboard} label="Copy Poll Link" />
+      </div>
     </div>
-    <PrimaryButton onClick={copyToClipboard} label="Copy Poll Link" />
   </FlatCard>
 )
 

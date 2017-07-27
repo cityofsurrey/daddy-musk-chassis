@@ -7,6 +7,9 @@ import theme from 'theme'
 const styles = {
   root: {
     textAlign: 'left',
+    '@media (min-width: 1150px)': {
+      margin: '20px 0 50px',
+    },
   },
   headerRow: {
     display: 'flex',
@@ -14,11 +17,17 @@ const styles = {
   },
   label: {
     color: theme.color.grey.faded,
+    '@media (min-width: 1150px)': {
+      fontSize: 24,
+    },
   },
   question: {
     margin: '10px 0',
     fontSize: 20,
     fontFamily: theme.fontFamily.bold,
+    '@media (min-width: 1150px)': {
+      fontSize: 34,
+    },
   },
 }
 

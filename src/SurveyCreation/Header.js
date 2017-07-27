@@ -26,6 +26,9 @@ const styles = {
     '@media (min-width: 768px)': {
       fontSize: 18,
     },
+    '@media (min-width: 1150px)': {
+      fontSize: 24,
+    },
   },
   facesCard: {
     padding: 5,
@@ -44,6 +47,10 @@ const styles = {
     '@media (min-width: 768px)': {
       width: 60,
       height: 60,
+    },
+    '@media (min-width: 1150px)': {
+      width: 80,
+      height: 80,
     },
   },
 }

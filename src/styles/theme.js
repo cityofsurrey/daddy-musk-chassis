@@ -57,7 +57,7 @@ const theme = {
     blue: '0 3px 5px 0 rgba(60, 47, 183, 0.5)',
   },
   lineSeparator: {
-    margin: '30px 0',
+    margin: '25px 0',
     height: 1,
     background: 'rgba(128, 139, 146, 0.25)',
   },

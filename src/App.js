@@ -28,7 +28,7 @@ function App(props) {
   return (
     <ApolloProvider client={createClient()}>
       <Provider store={props.store}>
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative', overflowX: 'hidden' }}>
           <Helmet
             titleTemplate="%s | Some Boilerplate"
             meta={[

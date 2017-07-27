@@ -18,6 +18,12 @@ const styles = {
   root: {
     padding: 15,
     textAlign: 'center',
+    overflowX: 'hidden',
+    maxWidth: 460,
+    margin: '0 auto',
+    '@media (min-width: 1150px)': {
+      maxWidth: 625,
+    },
   },
   backgroundHeader: {
     position: 'absolute',
@@ -30,6 +36,9 @@ const styles = {
     backgroundColor: theme.color.blue.primary,
     borderBottomLeftRadius: '50%',
     borderBottomRightRadius: '50%',
+  },
+  questionTitle: {
+    margin: '40px 0 0',
   },
   questions: {
     padding: '0 20px',
@@ -117,7 +126,8 @@ class Dashboard extends Component {
         <Header title="Polltal" />
         <PollLink id={votingId} />
         <div style={styles.questions}>
-          <ReleaseAllQuestions onReleaseAll={this.handleReleaseAllQuestions} />
+          {/* <ReleaseAllQuestions onReleaseAll={this.handleReleaseAllQuestions} /> */}
+          <div style={styles.questionTitle}>Poll Questions</div>
           <div style={theme.lineSeparator} />
           <Questions
             onRelease={this.handleReleaseQuestion}
@@ -143,4 +153,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ ...surveyActions }, dispatch),
 })
 
-export default Radium(connect(() => ({}), mapDispatchToProps)(withApollo(Dashboard)))
+export default connect(() => ({}), mapDispatchToProps)(withApollo(Radium(Dashboard)))
