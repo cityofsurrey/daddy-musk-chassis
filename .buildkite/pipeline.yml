@@ -1,18 +1,29 @@
 steps:
-  - command: scripts/build-image.sh
-    label: ":hammer: :docker:"
+  - command: scripts/test-unit.sh
+    label: ":eslint: :new_moon_with_face: :partyparrot:"
     env:
-      BUILDKITE_DOCKER_COMPOSE_CONTAINER: polltal-app
+      BUILDKITE_DOCKER_COMPOSE_CONTAINER: builder
 
   - command: scripts/check-version.sh
     label: ":point_up:"
 
   - wait
 
+  - command: scripts/build-image.sh
+    label: ":hammer: :docker:"
+    env:
+      BUILDKITE_DOCKER_COMPOSE_CONTAINER: builder
+
+  - wait
+
   - command: scripts/deploy-github.sh
     label: ":rocket: :github:"
+    env:
+      BUILDKITE_DOCKER_COMPOSE_CONTAINER: builder
     branches: master
 
   - command: scripts/deploy-dockerhub.sh
     label: ":rocket: :docker:"
     branches: master
+
+  - wait
