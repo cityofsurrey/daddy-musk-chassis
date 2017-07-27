@@ -1,5 +1,4 @@
 up:
-	@yarn run build
 	@docker-compose up -d --build
 	@docker-compose ps
 
