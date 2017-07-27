@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    image: cityofsurrey/node-builder
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $HOME/.ssh:/root/.ssh:ro
+    environment:
+      - GITHUB_RELEASE_ACCESS_TOKEN
+      - SNYK_TOKEN
+
+  polltal-app:
+    build: .
+    image: cityofsurrey/polltal-app
+    ports:
+      - '80:80'
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  # backend:
