@@ -14,7 +14,7 @@ import './app.css'
 const createClient = () => (
   new ApolloClient({
     networkInterface: createNetworkInterface({
-      uri: 'http://localhost:8000/graphql',
+      uri: 'http://polltal-api:8080',
     }),
     // networkInterface: createBatchingNetworkInterface({
     //   uri: 'http://localhost:8080/graphql',
