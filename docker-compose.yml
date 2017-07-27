@@ -20,11 +20,13 @@ services:
     environment:
       - TZ=America/Vancouver
       - SNYK_TOKEN
-    depends_on:
+    links:
       - polltal-api
 
   polltal-api:
     image: cityofsurrey/polltal-api
+    ports:
+      - 8080:8080
     depends_on:
       - db
 
