@@ -12,7 +12,7 @@ services:
     environment:
       - GITHUB_RELEASE_ACCESS_TOKEN
 
-  // TODO: update config below for dev
+  # TODO: update config below for dev
   polltal-app:
     build: .
     ports:
