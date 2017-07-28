@@ -17,3 +17,14 @@ services:
     environment:
       - TZ=America/Vancouver
       - DB=$POLLTAL_API_DB
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 128M
+      restart_policy:
+        condition: on-failure
