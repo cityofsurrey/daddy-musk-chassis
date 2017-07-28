@@ -58,9 +58,12 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: isDebug ? '"development"' : '"production"',
+        NODE_ENV: JSON.stringify(isDebug ? 'development' : 'production'),
+        POLLTAL_API: JSON.stringify(process.env.POLLTAL_API || 'http://localhost:8080'),
+        __DEV__: isDebug,
+        // port: process.env.PORT || 8080,
+        // ip: process.env.IP || '0.0.0.0',
       },
-      __DEV__: isDebug,
     }),
     // Emit a JSON file with assets paths
     // https://github.com/sporto/assets-webpack-plugin#options

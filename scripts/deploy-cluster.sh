@@ -5,7 +5,7 @@ set -eo pipefail
 source ./scripts/utils.sh
 
 echo "Checking env variables"
-envs=("POLLTAL_API_DB")
+envs=("POLLTAL_API_DB" "POLLTAL_API")
 for env in ${envs[*]};
 do
   if [[ -z "${!env}" ]]; then

@@ -1,6 +1,6 @@
 {
-  "name": "some-boilerplate",
-  "version": "1.0.1",
+  "name": "polltal-app",
+  "version": "1.0.2",
   "scripts": {
     "start": "node tools/run.js",
     "build": "NODE_ENV=production node tools/build.js",
