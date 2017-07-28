@@ -1,6 +1,6 @@
 {
   "name": "some-boilerplate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "start": "node tools/run.js",
     "build": "NODE_ENV=production node tools/build.js",
