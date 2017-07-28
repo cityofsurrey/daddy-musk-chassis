@@ -8,7 +8,7 @@ curl \
   -H "Authorization: token ${GITHUB_RELEASE_ACCESS_TOKEN}" \
   --fail --silent \
   https://api.github.com/repos/cityofsurrey/mysurrey-app/releases/tags/${VERSION} \
-  > /dev/null
+  >/dev/null
 
 if [ $? -eq 0 ]; then
   inline_image "http://i.giphy.com/l2Sqb2raeiZLVDFaU.gif" "failed"
