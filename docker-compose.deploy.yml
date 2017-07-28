@@ -4,7 +4,7 @@ services:
   polltal-app:
     image: cityofsurrey/polltal-app:latest
     ports:
-      - 9000:80
+      - 80:80
     environment:
       - TZ=America/Vancouver
       - POLLTAL_API
