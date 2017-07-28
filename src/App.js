@@ -14,7 +14,7 @@ import './app.css'
 const createClient = () => (
   new ApolloClient({
     networkInterface: createNetworkInterface({
-      uri: `${process.env.POLLTAL_API}/graphql',
+      uri: `${process.env.POLLTAL_API}/graphql`,
     }),
   })
 )
