@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { ApolloProvider, ApolloClient, createNetworkInterface, createBatchingNetworkInterface } from 'react-apollo'
+import { ApolloProvider, ApolloClient, createNetworkInterface } from 'react-apollo'
 import { Provider } from 'react-redux'
 
 import Routes from './routes'
