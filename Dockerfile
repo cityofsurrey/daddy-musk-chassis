@@ -14,6 +14,6 @@ RUN ln -s /tmp/node_modules
 RUN npm run build
 CMD npm start
 
-EXPOSE 8090
+EXPOSE 8080
 
-HEALTHCHECK CMD curl --fail http://localhost:8090/ || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:8080/ || exit 1

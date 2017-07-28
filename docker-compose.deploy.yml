@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  # polltal-app:
+  #   image: cityofsurrey/polltal-api:latest
+  #   ports:
+  #     - 8080:8080
+  #   environment:
+  #     - TZ=America/Vancouver
+  #   depends_on:
+  #     - polltal-api
+
+  polltal-api:
+    image: cityofsurrey/polltal-api
+    ports:
+      - 9000:8080
+    environment:
+      - TZ=America/Vancouver
+      - DB=$POLLTAL_API_DB
