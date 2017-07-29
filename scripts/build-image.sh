@@ -5,7 +5,7 @@ set -eo pipefail
 source ./scripts/utils.sh
 
 echo "--- Building app"
-
+echo $POLLTAL_API
 
 echo "--- Building app"
 yarn install
