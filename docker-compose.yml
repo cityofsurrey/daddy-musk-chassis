@@ -11,6 +11,7 @@ services:
       - $HOME/.ssh:/root/.ssh:ro
     environment:
       - GITHUB_RELEASE_ACCESS_TOKEN
+      - POLLTAL_API
 
   # TODO: update config below for dev
   polltal-app:
