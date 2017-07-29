@@ -10,17 +10,17 @@ steps:
   #     BUILDKITE_DOCKER_COMPOSE_CONTAINER: polltal-app-test
   #
 
-  - command: scripts/check-version.sh
-    label: ":point_up:"
-
-  - wait
-
-  - command: scripts/build-image.sh
-    label: ":hammer: :docker:"
-    env:
-      BUILDKITE_DOCKER_COMPOSE_CONTAINER: builder
-
-  - wait
+  # - command: scripts/check-version.sh
+  #   label: ":point_up:"
+  #
+  # - wait
+  #
+  # - command: scripts/build-image.sh
+  #   label: ":hammer: :docker:"
+  #   env:
+  #     BUILDKITE_DOCKER_COMPOSE_CONTAINER: builder
+  #
+  # - wait
 
   # - command: scripts/deploy-github.sh
   #   label: ":rocket: :github:"
@@ -28,11 +28,11 @@ steps:
   #     BUILDKITE_DOCKER_COMPOSE_CONTAINER: builder
   #   branches: master
 
-  - command: scripts/deploy-dockerhub.sh
-    label: ":rocket: :docker:"
-    branches: master
-
-  - wait
+  # - command: scripts/deploy-dockerhub.sh
+  #   label: ":rocket: :docker:"
+  #   branches: master
+  #
+  # - wait
 
   - command: scripts/deploy-cluster.sh
     label: ":rocket: :node:"
@@ -40,7 +40,7 @@ steps:
       - queue=deploy
       - cluster=polltal
       - env=test
-    branches: master
+    # branches: master
 
   # - block: ":fire:"
   #   branches: master
