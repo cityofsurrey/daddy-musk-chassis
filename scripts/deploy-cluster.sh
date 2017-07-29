@@ -14,6 +14,9 @@ do
   fi
 done
 
+echo $POLLTAL_API
+echo $POLLTAL_API_DB
+
 echo "--- Deploying new version"
 docker stack deploy \
   --compose-file docker-compose.deploy.yml \
