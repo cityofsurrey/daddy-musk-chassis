@@ -11,11 +11,11 @@ steps:
 
   - wait
 
-  - command: scripts/deploy-github.sh
-    label: ":rocket: :github:"
-    env:
-      BUILDKITE_DOCKER_COMPOSE_CONTAINER: builder
-    # branches: master
+  # - command: scripts/deploy-github.sh
+  #   label: ":rocket: :github:"
+  #   env:
+  #     BUILDKITE_DOCKER_COMPOSE_CONTAINER: builder
+  #   branches: master
 
   - command: scripts/deploy-dockerhub.sh
     label: ":rocket: :docker:"
