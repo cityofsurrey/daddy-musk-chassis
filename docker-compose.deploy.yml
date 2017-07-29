@@ -7,7 +7,7 @@ services:
       - 80:80
     environment:
       - TZ=America/Vancouver
-      - POLLTAL_API
+      - POLLTAL_API="http://tstdocker05.surrey.ca:8080"
     deploy:
       replicas: 3
       update_config:
