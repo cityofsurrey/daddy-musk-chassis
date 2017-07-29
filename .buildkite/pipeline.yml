@@ -19,7 +19,7 @@ steps:
 
   - command: scripts/deploy-dockerhub.sh
     label: ":rocket: :docker:"
-    # branches: master
+    branches: master
 
   - wait
 
@@ -29,4 +29,4 @@ steps:
       - queue=deploy
       - cluster=polltal
       - env=test
-    # branches: master
+    branches: master
