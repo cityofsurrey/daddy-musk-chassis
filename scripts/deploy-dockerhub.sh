@@ -6,12 +6,6 @@ source ./scripts/utils.sh
 
 VERSION=$(package_version)
 
-echo "--- Building docker image"
-docker build \
-  --pull \
-  --tag cityofsurrey/polltal-app:${VERSION} \
-  .
-
 echo "--- Tagging docker image with version ${VERSION}"
 docker tag \
   cityofsurrey/polltal-app:${VERSION} \

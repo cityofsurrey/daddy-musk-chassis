@@ -1,22 +1,23 @@
 version: '3'
 
 services:
-  # builder:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.build
-  #   image: cityofsurrey/node-builder
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - $HOME/.ssh:/root/.ssh:ro
-  #   environment:
-  #     - GITHUB_RELEASE_ACCESS_TOKEN
-  #     - SNYK_TOKEN
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    image: cityofsurrey/node-builder
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $HOME/.ssh:/root/.ssh:ro
+    environment:
+      - GITHUB_RELEASE_ACCESS_TOKEN
+      - POLLTAL_API
 
+  # TODO: update config below for dev
   polltal-app:
     build: .
     ports:
-      - 8090:8090
+      - 8090:8080
     environment:
       - TZ=America/Vancouver
       - SNYK_TOKEN

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { ApolloProvider, ApolloClient, createNetworkInterface, createBatchingNetworkInterface } from 'react-apollo'
+import { ApolloProvider, ApolloClient, createNetworkInterface } from 'react-apollo'
 import { Provider } from 'react-redux'
 
 import Routes from './routes'
@@ -14,14 +14,8 @@ import './app.css'
 const createClient = () => (
   new ApolloClient({
     networkInterface: createNetworkInterface({
-      // uri: 'http://polltal-api:8080/graphql',
-      uri: 'http://localhost:8080/graphql',
+      uri: `${process.env.POLLTAL_API}/graphql`,
     }),
-    // networkInterface: createBatchingNetworkInterface({
-    //   uri: 'http://localhost:8080/graphql',
-    //   batchInterval: 30,
-    //   batchMax: 10,
-    // }),
   })
 )
 

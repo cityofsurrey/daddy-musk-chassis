@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  polltal-app:
+    image: cityofsurrey/polltal-app:latest
+    ports:
+      - 80:80
+    environment:
+      - TZ=America/Vancouver
+      - POLLTAL_API
+    deploy:
+      replicas: 6
+      update_config:
+        parallelism: 1
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 128M
+      restart_policy:
+        condition: on-failure
+
+  polltal-api:
+    image: cityofsurrey/polltal-api:latest
+    ports:
+      - 8080:8080
+    environment:
+      - TZ=America/Vancouver
+      - DB=$POLLTAL_API_DB
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 128M
+      restart_policy:
+        condition: on-failure
