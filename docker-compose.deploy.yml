@@ -9,7 +9,7 @@ services:
       - TZ=America/Vancouver
       - POLLTAL_API
     deploy:
-      replicas: 3
+      replicas: 6
       update_config:
         parallelism: 1
         delay: 10s
@@ -28,7 +28,7 @@ services:
       - TZ=America/Vancouver
       - DB=$POLLTAL_API_DB
     deploy:
-      replicas: 3
+      replicas: 1
       update_config:
         parallelism: 1
         delay: 10s
