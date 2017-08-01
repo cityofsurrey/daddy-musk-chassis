@@ -33,6 +33,6 @@ jobs:
       # Deploy to production
       - run:
           command: |
-            # if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
               aws s3 sync ./public/ s3://polltal.surrey.ca/ --delete
-            # fi
+            fi
