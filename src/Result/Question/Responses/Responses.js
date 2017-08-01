@@ -42,7 +42,7 @@ const Responses = ({ length, responseValues }) => (
           <div style={styles.measurement}>
             <Bar percentage={calculatePercentage(responseValues[value], length)} />
             <div style={styles.percent}>
-              {calculatePercentage(responseValues[value], length) * 100}%
+              {(calculatePercentage(responseValues[value], length) * 100).toFixed(2)}%
             </div>
           </div>
         </div>
