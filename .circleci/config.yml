@@ -1,0 +1,38 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: /polltal-app
+    docker:
+      - image: makkke/node
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: yarn install
+
+      # TODO: fix and enable linting
+      # Lint test
+      # - run: yarn run test:lint
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # Build
+      - run: yarn run build
+
+      # Deploy to production
+      - run:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              aws s3 sync ./public/ s3://polltal.surrey.ca/ --delete
+            fi
