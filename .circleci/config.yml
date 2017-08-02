@@ -34,5 +34,5 @@ jobs:
       - run:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              aws s3 sync ./public/ s3://polltal.surrey.ca/ --delete
+              aws s3 sync ./public/ s3://polltal.ca/ --delete
             fi
