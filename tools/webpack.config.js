@@ -60,7 +60,7 @@ const config = {
       'process.env': {
         NODE_ENV: JSON.stringify(isDebug ? 'development' : 'production'),
         POLLTAL_API: JSON.stringify(isDebug ? `http://localhost:${process.env.API_PORT || 8080}` : process.env.POLLTAL_API),
-        HOST: JSON.stringify(isDebug ? `http://localhost:${process.env.PORT || 8090}` : process.env.HOSTX),
+        APP_URL: JSON.stringify(isDebug ? `http://localhost:${process.env.PORT || 8090}` : process.env.APP_URL),
         __DEV__: isDebug,
       },
     }),
