@@ -59,7 +59,7 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(isDebug ? 'development' : 'production'),
-        POLLTAL_API: JSON.stringify(isDebug ? `http://localhost:${process.env.PORT || 8080}` : process.env.POLLTAL_API),
+        POLLTAL_API: JSON.stringify(isDebug ? `http://localhost:${process.env.API_PORT || 8080}` : process.env.POLLTAL_API),
         HOST: JSON.stringify(isDebug ? `http://localhost:${process.env.PORT || 8090}` : process.env.HOST),
         __DEV__: isDebug,
       },
