@@ -59,10 +59,9 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(isDebug ? 'development' : 'production'),
-        POLLTAL_API: JSON.stringify(process.env.POLLTAL_API || 'http://tstdocker05.surrey.ca:8080'),
+        POLLTAL_API: JSON.stringify(isDebug ? `http://localhost:${process.env.PORT || 8080}` : process.env.POLLTAL_API),
+        HOST: JSON.stringify(isDebug ? `http://localhost:${process.env.PORT || 8090}` : process.env.HOST),
         __DEV__: isDebug,
-        // port: process.env.PORT || 8080,
-        // ip: process.env.IP || '0.0.0.0',
       },
     }),
     // Emit a JSON file with assets paths

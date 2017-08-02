@@ -57,7 +57,7 @@ const PollLink = ({ id }) => (
           <TextField
             id="pollLink"
             inputStyle={styles.inputStyle}
-            value={`${window.location.origin}/voting/${id}`}
+            value={`${process.env.HOST}/voting/${id}`}
           />
         </div>
         <PrimaryButton onClick={copyToClipboard} label="Copy Poll Link" />
